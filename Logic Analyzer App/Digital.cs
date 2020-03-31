@@ -7,24 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+// Is 5 too many or too few?
+// I was thinking user selects from predetermined pins in combo box
 namespace Logic_Analyzer_App
 {
-    public partial class Form1 : Form
+    public partial class Digital : Form
     {
-        public Form1()
+        public Digital()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
