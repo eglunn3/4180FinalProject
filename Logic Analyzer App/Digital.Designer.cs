@@ -69,7 +69,7 @@
             // Pin4Combo
             // 
             this.Pin4Combo.FormattingEnabled = true;
-            this.Pin4Combo.Location = new System.Drawing.Point(12, 243);
+            this.Pin4Combo.Location = new System.Drawing.Point(12, 226);
             this.Pin4Combo.Name = "Pin4Combo";
             this.Pin4Combo.Size = new System.Drawing.Size(121, 24);
             this.Pin4Combo.TabIndex = 3;
@@ -77,7 +77,7 @@
             // Pin5Combo
             // 
             this.Pin5Combo.FormattingEnabled = true;
-            this.Pin5Combo.Location = new System.Drawing.Point(12, 310);
+            this.Pin5Combo.Location = new System.Drawing.Point(12, 281);
             this.Pin5Combo.Name = "Pin5Combo";
             this.Pin5Combo.Size = new System.Drawing.Size(121, 24);
             this.Pin5Combo.TabIndex = 4;
@@ -126,7 +126,7 @@
             // 
             // Pin4Out
             // 
-            this.Pin4Out.Location = new System.Drawing.Point(168, 245);
+            this.Pin4Out.Location = new System.Drawing.Point(168, 228);
             this.Pin4Out.Name = "Pin4Out";
             this.Pin4Out.ReadOnly = true;
             this.Pin4Out.Size = new System.Drawing.Size(39, 22);
@@ -134,7 +134,7 @@
             // 
             // Pin5Out
             // 
-            this.Pin5Out.Location = new System.Drawing.Point(168, 312);
+            this.Pin5Out.Location = new System.Drawing.Point(168, 283);
             this.Pin5Out.Name = "Pin5Out";
             this.Pin5Out.ReadOnly = true;
             this.Pin5Out.Size = new System.Drawing.Size(39, 22);
