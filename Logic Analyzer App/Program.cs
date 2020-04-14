@@ -6,17 +6,27 @@ using System.Windows.Forms;
 
 namespace Logic_Analyzer_App
 {
+    
     static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenu());
+            //
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.StartPosition = FormStartPosition.CenterScreen;
+            mainMenu.AutoSize = true;
+            Application.Run(mainMenu);
+            //
+            //Application.Run(new MainMenu());
+            
         }
+ 
     }
 }
