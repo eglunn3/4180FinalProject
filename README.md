@@ -1,2 +1,2 @@
-# 4180FinalProject
-Repository for Visual Studio and Mbed code
+# MBED Logic Analyzer
+Repository for Visual Studio and MBED code
