@@ -40,6 +40,8 @@
             this.Pin3Out = new System.Windows.Forms.TextBox();
             this.Pin4Out = new System.Windows.Forms.TextBox();
             this.Pin5Out = new System.Windows.Forms.TextBox();
+            this.StartButton = new System.Windows.Forms.Button();
+            this.StopButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Pin1Combo
@@ -150,6 +152,7 @@
             this.Pin1Out.ReadOnly = true;
             this.Pin1Out.Size = new System.Drawing.Size(74, 38);
             this.Pin1Out.TabIndex = 7;
+            this.Pin1Out.TextChanged += new System.EventHandler(this.Pin1Out_TextChanged);
             // 
             // Pin2Out
             // 
@@ -187,11 +190,33 @@
             this.Pin5Out.Size = new System.Drawing.Size(74, 38);
             this.Pin5Out.TabIndex = 11;
             // 
+            // StartButton
+            // 
+            this.StartButton.Location = new System.Drawing.Point(24, 618);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(134, 55);
+            this.StartButton.TabIndex = 12;
+            this.StartButton.Text = "Start";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // StopButton
+            // 
+            this.StopButton.Location = new System.Drawing.Point(164, 618);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(134, 55);
+            this.StopButton.TabIndex = 13;
+            this.StopButton.Text = "Stop";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
             // Digital
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 703);
+            this.Controls.Add(this.StopButton);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.Pin5Out);
             this.Controls.Add(this.Pin4Out);
             this.Controls.Add(this.Pin3Out);
@@ -228,5 +253,7 @@
         private System.Windows.Forms.TextBox Pin3Out;
         private System.Windows.Forms.TextBox Pin4Out;
         private System.Windows.Forms.TextBox Pin5Out;
+        private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.Button StopButton;
     }
 }
