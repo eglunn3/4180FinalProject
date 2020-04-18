@@ -12,8 +12,8 @@ namespace Logic_Analyzer_App
 {
     public partial class I2C : Form
     {
-        protected List<UInt16> dygraph = new List<UInt16>();
-        protected List<string> trev = new List<string>();
+        List<UInt16> dygraph = new List<UInt16>();
+        List<string> trev = new List<string>();
         public I2C()
         {
             InitializeComponent();
@@ -22,14 +22,14 @@ namespace Logic_Analyzer_App
         private void I2CChart_Click(object sender, EventArgs e)
         {
             trev.Add(DateTime.Now.ToString());
-            dygraph.Add(1);
+            dygraph.Add(1); //Add data 
             trev.Add(DateTime.Now.ToString());
             dygraph.Add(0);
             trev.Add(DateTime.Now.ToString());
             dygraph.Add(1);
             trev.Add(DateTime.Now.ToString());
             dygraph.Add(0);
-            I2CChart.Series["Series1"].Points.DataBindXY(trev, dygraph);
+            I2CChart.Series["I2C"].Points.DataBindXY(trev, dygraph); //Update graph
         }
     }
 }

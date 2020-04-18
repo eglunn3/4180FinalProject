@@ -37,9 +37,19 @@
             // 
             // I2CChart
             // 
-            this.I2CChart.BackColor = System.Drawing.Color.Black;
             this.I2CChart.BorderlineColor = System.Drawing.Color.Black;
+            chartArea1.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisX.TitleForeColor = System.Drawing.Color.White;
+            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.AxisX2.LineColor = System.Drawing.Color.Lime;
+            chartArea1.AxisX2.TitleForeColor = System.Drawing.Color.Lime;
+            chartArea1.AxisY.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisY.TitleForeColor = System.Drawing.Color.White;
+            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.AxisY2.LineColor = System.Drawing.Color.Lime;
+            chartArea1.AxisY2.TitleForeColor = System.Drawing.Color.Lime;
             chartArea1.BackColor = System.Drawing.Color.Black;
+            chartArea1.BorderColor = System.Drawing.Color.White;
             chartArea1.Name = "ChartArea1";
             this.I2CChart.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
@@ -50,6 +60,8 @@
             this.I2CChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series1.Color = System.Drawing.Color.Lime;
+            series1.LabelForeColor = System.Drawing.Color.Lime;
             series1.Legend = "Legend1";
             series1.Name = "I2C";
             this.I2CChart.Series.Add(series1);
