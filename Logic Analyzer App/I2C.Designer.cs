@@ -32,6 +32,9 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.I2CChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.I2CStart = new System.Windows.Forms.Button();
+            this.I2CStop = new System.Windows.Forms.Button();
+            this.I2CPinInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.I2CChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,21 +73,56 @@
             this.I2CChart.Text = "I2CChart";
             this.I2CChart.Click += new System.EventHandler(this.I2CChart_Click);
             // 
+            // I2CStart
+            // 
+            this.I2CStart.Location = new System.Drawing.Point(65, 460);
+            this.I2CStart.Name = "I2CStart";
+            this.I2CStart.Size = new System.Drawing.Size(105, 39);
+            this.I2CStart.TabIndex = 1;
+            this.I2CStart.Text = "Start";
+            this.I2CStart.UseVisualStyleBackColor = true;
+            this.I2CStart.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // I2CStop
+            // 
+            this.I2CStop.Location = new System.Drawing.Point(176, 460);
+            this.I2CStop.Name = "I2CStop";
+            this.I2CStop.Size = new System.Drawing.Size(105, 39);
+            this.I2CStop.TabIndex = 2;
+            this.I2CStop.Text = "Stop";
+            this.I2CStop.UseVisualStyleBackColor = true;
+            // 
+            // I2CPinInfo
+            // 
+            this.I2CPinInfo.AutoSize = true;
+            this.I2CPinInfo.Location = new System.Drawing.Point(305, 471);
+            this.I2CPinInfo.Name = "I2CPinInfo";
+            this.I2CPinInfo.Size = new System.Drawing.Size(243, 17);
+            this.I2CPinInfo.TabIndex = 3;
+            this.I2CPinInfo.Text = "The pins used for I2C Monitoring Are:";
+            // 
             // I2C
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 447);
+            this.ClientSize = new System.Drawing.Size(769, 528);
+            this.Controls.Add(this.I2CPinInfo);
+            this.Controls.Add(this.I2CStop);
+            this.Controls.Add(this.I2CStart);
             this.Controls.Add(this.I2CChart);
             this.Name = "I2C";
             this.Text = "I2C";
             ((System.ComponentModel.ISupportInitialize)(this.I2CChart)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart I2CChart;
+        private System.Windows.Forms.Button I2CStart;
+        private System.Windows.Forms.Button I2CStop;
+        private System.Windows.Forms.Label I2CPinInfo;
     }
 }

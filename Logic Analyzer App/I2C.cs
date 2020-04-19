@@ -31,5 +31,10 @@ namespace Logic_Analyzer_App
             dygraph.Add(0);
             I2CChart.Series["I2C"].Points.DataBindXY(trev, dygraph); //Update graph
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
