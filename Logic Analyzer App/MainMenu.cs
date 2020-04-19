@@ -58,6 +58,7 @@ namespace Logic_Analyzer_App
             if (!DigOpen & !string.IsNullOrEmpty(theCOM))
             {
                 Digital dig = new Digital(theCOM, DigOpen);
+                dig.StartPosition = FormStartPosition.CenterScreen;
                 dig.Show();
                 dig.DigOpen = true;
                 DigOpen = dig.DigOpen;
@@ -84,11 +85,13 @@ namespace Logic_Analyzer_App
             }
         }
 
+
         private void I2CSelect_Click(object sender, EventArgs e)
         {
             I2COpen = this.IsMdiContainer;
             I2C i2c = new I2C();
             i2c.Show();
+
         }
     }
 }
