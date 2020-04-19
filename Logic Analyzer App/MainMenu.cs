@@ -67,6 +67,7 @@ namespace Logic_Analyzer_App
             if (!DigOpen & !string.IsNullOrEmpty(theCOM))
             {
                 Digital dig = new Digital(theCOM, DigOpen);
+                dig.StartPosition = FormStartPosition.CenterScreen;
                 dig.Show();
                 dig.DigOpen = true;
                 DigOpen = dig.DigOpen;
@@ -91,6 +92,31 @@ namespace Logic_Analyzer_App
                     //MessageBox.Show("Undescribed Behavior", "Undescribed Behavior");
                 }
             }
+        }
+
+        private void PortSelectLabel_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SPISelect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SerialSelect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void I2CSelect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AnalogSelect_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

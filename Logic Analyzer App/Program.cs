@@ -18,13 +18,10 @@ namespace Logic_Analyzer_App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //
             MainMenu mainMenu = new MainMenu();
             mainMenu.StartPosition = FormStartPosition.CenterScreen;
             mainMenu.AutoSize = true;
             Application.Run(mainMenu);
-            //
-            //Application.Run(new MainMenu());
             
         }
  
