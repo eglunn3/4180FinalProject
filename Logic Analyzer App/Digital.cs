@@ -19,13 +19,7 @@ namespace Logic_Analyzer_App
         static SerialPort Port;
         public bool DigOpen { get; set; }
         byte[] bits = new byte[1] { 0 }; //string used for mbed communication
-        static int pinNum1;
-        static int pinNum2;
-        static int pinNum3;
-        static int pinNum4;
-        static int pinNum5;
-        static string mbed;
-        //Thread readThread = new Thread(Read);
+
         public delegate void DisplaySerial(int mbedstuff);
         public DisplaySerial mbedSerial;
 
@@ -91,12 +85,11 @@ namespace Logic_Analyzer_App
         private void StopButton_Click(object sender, EventArgs e)
         {
             bits[0] = 0; //sets the R bit to 0 to stop digital collection
-                         //Port.Write(ConvertStringArrayToString(bits)); //tells mbed to stop
-            if (Pin21_Select.Checked) { Pin1Out.Text = "0"; } else { Pin1Out.Text = ""; }
-            if (Pin22_Select.Checked) { Pin2Out.Text = "0"; } else { Pin2Out.Text = ""; }
-            if (Pin23_Select.Checked) { Pin3Out.Text = "0"; } else { Pin3Out.Text = ""; }
-            if (Pin24_Select.Checked) { Pin4Out.Text = "0"; } else { Pin4Out.Text = ""; }
-            if (Pin25_Select.Checked) { Pin5Out.Text = "0"; } else { Pin5Out.Text = ""; }
+            Pin1Out.BackColor = SystemColors.Control;
+            Pin2Out.BackColor = SystemColors.Control;
+            Pin3Out.BackColor = SystemColors.Control;
+            Pin4Out.BackColor = SystemColors.Control;
+            Pin5Out.BackColor = SystemColors.Control;
             Port.Write(bits, 0, 1);
 
 
@@ -111,36 +104,36 @@ namespace Logic_Analyzer_App
             thestring -= 32;
             if (thestring >= 16)
             {
-                Pin1Out.Text = "High";
+                Pin1Out.BackColor = SystemColors.Highlight;
                 thestring -= 16;
             }
             else if (thestring >= 8)
             {
-                Pin2Out.Text = "High";
+                Pin2Out.BackColor = SystemColors.Highlight;
                 thestring -= 8;
             }
             else if (thestring >= 4)
             {
-                Pin3Out.Text = "High";
+                Pin3Out.BackColor = SystemColors.Highlight;
                 thestring -= 4;
             }
             else if (thestring >= 2)
             {
-                Pin4Out.Text = "High";
+                Pin4Out.BackColor = SystemColors.Highlight;
                 thestring -= 2;
             }
             else if (thestring > 0)
             {
-                Pin5Out.Text = "High";
+                Pin5Out.BackColor = SystemColors.Highlight;
                 thestring -= 1;
             }
             else
             {
-                if (Pin21_Select.Checked) { Pin1Out.Text = "0"; } else { Pin1Out.Text = ""; }
-                if (Pin22_Select.Checked) { Pin2Out.Text = "0"; } else { Pin2Out.Text = ""; }
-                if (Pin23_Select.Checked) { Pin3Out.Text = "0"; } else { Pin3Out.Text = ""; }
-                if (Pin24_Select.Checked) { Pin4Out.Text = "0"; } else { Pin4Out.Text = ""; }
-                if (Pin25_Select.Checked) { Pin5Out.Text = "0"; } else { Pin5Out.Text = ""; }
+                Pin1Out.BackColor = SystemColors.Control;
+                Pin2Out.BackColor = SystemColors.Control;
+                Pin3Out.BackColor = SystemColors.Control;
+                Pin4Out.BackColor = SystemColors.Control;
+                Pin5Out.BackColor = SystemColors.Control;
             }
             
         }
@@ -153,28 +146,11 @@ namespace Logic_Analyzer_App
         }
 
 
-        static string ConvertStringArrayToString(string[] array) //converts the string array to one string for serial communication
-        {   //this was found online, thought it would be easy to use but have not verified its output
-            // Concatenate all the elements into a StringBuilder.
-            StringBuilder builder = new StringBuilder();
-            foreach (string value in array)
-            {
-                builder.Append(value);
-                builder.Append('.');
-            }
-            return builder.ToString();
-        }
-
         private void Pin21_Select_CheckedChanged(object sender, EventArgs e)
         {
             if (Pin21_Select.Checked)
             { 
                 bits[0] += 16;
-                Pin1Out.Text = "0";
-            }
-            else
-            {
-                Pin1Out.Text = "";
             }
             
         }
@@ -185,11 +161,6 @@ namespace Logic_Analyzer_App
             if (Pin22_Select.Checked)
             {
                 bits[0] += 8;
-                Pin2Out.Text = "0";
-            }
-            else
-            {
-                Pin2Out.Text = "";
             }
                 
         }
@@ -197,26 +168,19 @@ namespace Logic_Analyzer_App
         private void Pin23_Select_CheckedChanged(object sender, EventArgs e)
         {
             if (Pin23_Select.Checked)
-            { bits[0] += 4; Pin3Out.Text = "0"; }
-            else
-            { Pin3Out.Text = ""; }
+            { bits[0] += 4; }
         }
         private void Pin24_Select_CheckedChanged(object sender, EventArgs e)
         {
             if (Pin24_Select.Checked)
-            { bits[0] += 2; Pin4Out.Text = "0"; }
-            else
-            { Pin4Out.Text = ""; }
+            { bits[0] += 2; }
                 
         }
 
         private void Pin25_Select_CheckedChanged(object sender, EventArgs e)
         {
             if (Pin25_Select.Checked)
-            { bits[0] += 1; Pin5Out.Text = "0"; }
-            else
-            { Pin5Out.Text = ""; }
+            { bits[0] += 1; }
         }
-        
     }
 }
