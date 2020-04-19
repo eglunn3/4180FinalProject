@@ -112,7 +112,7 @@ namespace Logic_Analyzer_App
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            bits[0] = bits[1] = bits[2] = bits[3] = bits[4] = bits[5] = bits[6] = bits[7] = "0"; //sets the R bit to 0 to stop digital collection
+            bits[0] = bits[1] = bits[2] = bits[3] = bits[4] = bits[5] = bits[6] = bits[7] = 0; //sets the R bit to 0 to stop digital collection
             //_readon = false; //tells the Read thead to stop
             //Port.Write(ConvertStringArrayToString(bits)); //tells mbed to stop
             Port.Write("0x00");
