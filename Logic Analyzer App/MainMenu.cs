@@ -16,6 +16,7 @@ namespace Logic_Analyzer_App
         public SerialPort Port;
         public bool PortOpen = false;
         public bool DigOpen = false;
+        public bool I2COpen = false; 
         public string[] portnames;
         public string theCOM = "";
         
@@ -35,21 +36,11 @@ namespace Logic_Analyzer_App
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (DigOpen)
             {
-                MessageBox.Show("This port is alreay connected. To continue, you must select a differe port.", "Serial Port Error");
+                MessageBox.Show("This port is alreay connected. To continue, you must select a different port.", "Serial Port Error");
             }
             else
             {
@@ -94,28 +85,12 @@ namespace Logic_Analyzer_App
             }
         }
 
-        private void PortSelectLabel_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SPISelect_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SerialSelect_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void I2CSelect_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void AnalogSelect_Click(object sender, EventArgs e)
-        {
+            I2COpen = this.IsMdiContainer;
+            I2C i2c = new I2C();
+            i2c.Show();
 
         }
     }
