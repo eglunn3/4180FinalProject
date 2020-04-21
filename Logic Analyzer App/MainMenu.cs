@@ -93,5 +93,40 @@ namespace Logic_Analyzer_App
             i2c.Show();
 
         }
+
+        private void SPISelect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SerialSelect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AnalogSelect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    Analog AnnaBanana = new Analog(theCOM);
+                    AnnaBanana.StartPosition = FormStartPosition.CenterScreen;
+                    AnnaBanana.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error");
+            }
+        }
     }
 }
