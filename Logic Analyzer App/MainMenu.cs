@@ -128,5 +128,10 @@ namespace Logic_Analyzer_App
                 MessageBox.Show(error.Message, "Error");
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
