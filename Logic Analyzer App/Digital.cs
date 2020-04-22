@@ -29,27 +29,11 @@ namespace Logic_Analyzer_App
             InitializeComponent();
             mbedSerial = new DisplaySerial(SerialtoTextMethod);
 
-            if (!IsOpen & !string.IsNullOrEmpty(ComPort))
-            {
                 Port = new SerialPort(ComPort, 9600, Parity.None, 8, StopBits.One);
                 Port.Open();
                 Port.DataReceived += new SerialDataReceivedEventHandler(YouveGotCereal);
                 IsOpen = true;
                 
-            }
-            else if(IsOpen)
-            {
-                MessageBox.Show("Serial port connection already established.", "Serial Port Error");
-                this.Close();
-            }
-            else if(string.IsNullOrEmpty(ComPort))
-            {
-                MessageBox.Show("Must Select a port to continue.", "Serial Port Error");
-            }
-            else
-            {
-                MessageBox.Show("Unhandled Behavior", "Unknown");
-            }
 
         }
 
@@ -69,15 +53,12 @@ namespace Logic_Analyzer_App
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            bits[0] += 32; //first and third bit in array tell mbed to read data and to use digital
+            bits[0] = 32; //first and third bit in array tell mbed to read data and to use digital
             if (Pin21_Select.Checked) { bits[0] += 16; }
             if (Pin22_Select.Checked) { bits[0] += 8; } 
             if (Pin23_Select.Checked) { bits[0] += 4; }
             if (Pin24_Select.Checked) { bits[0] += 2; }
             if (Pin25_Select.Checked) { bits[0] += 1; }
-            //_readon = true;//serial communication ready, used in Read thread
-            //readThread.Start();//starts thread
-            //Port.Write(ConvertStringArrayToString(bits));//tells mbed to start
             Port.Write(bits, 0, 1);
             bits[0] = 0; //Clears the bits
         }
@@ -91,8 +72,6 @@ namespace Logic_Analyzer_App
             Pin4Out.BackColor = SystemColors.Control;
             Pin5Out.BackColor = SystemColors.Control;
             Port.Write(bits, 0, 1);
-
-
         }
         private void Pin1Out_TextChanged(object sender, EventArgs e)
         {
@@ -101,38 +80,50 @@ namespace Logic_Analyzer_App
 
         public void SerialtoTextMethod(int thestring)
         {
-            thestring -= 32;
+            
             if (thestring >= 16)
             {
                 Pin1Out.BackColor = SystemColors.Highlight;
                 thestring -= 16;
             }
-            else if (thestring >= 8)
+            else
+            {
+                Pin1Out.BackColor = SystemColors.Control;
+            }
+            if (thestring >= 8)
             {
                 Pin2Out.BackColor = SystemColors.Highlight;
                 thestring -= 8;
             }
-            else if (thestring >= 4)
+            else
+            {
+                Pin2Out.BackColor = SystemColors.Control;
+            }
+            if (thestring >= 4)
             {
                 Pin3Out.BackColor = SystemColors.Highlight;
                 thestring -= 4;
             }
-            else if (thestring >= 2)
+            else
+            {
+                Pin3Out.BackColor = SystemColors.Control;
+            }
+            if (thestring >= 2)
             {
                 Pin4Out.BackColor = SystemColors.Highlight;
                 thestring -= 2;
             }
-            else if (thestring > 0)
+            else
+            {
+                Pin4Out.BackColor = SystemColors.Control;
+            }
+            if (thestring > 0)
             {
                 Pin5Out.BackColor = SystemColors.Highlight;
                 thestring -= 1;
             }
             else
             {
-                Pin1Out.BackColor = SystemColors.Control;
-                Pin2Out.BackColor = SystemColors.Control;
-                Pin3Out.BackColor = SystemColors.Control;
-                Pin4Out.BackColor = SystemColors.Control;
                 Pin5Out.BackColor = SystemColors.Control;
             }
             
@@ -140,47 +131,11 @@ namespace Logic_Analyzer_App
 
         private void YouveGotCereal(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            
             int mbedstuff = Port.ReadChar();
-            Invoke(mbedSerial, mbedstuff);
+            Invoke(mbedSerial, (mbedstuff-32));
         }
 
 
-        private void Pin21_Select_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Pin21_Select.Checked)
-            { 
-                bits[0] += 16;
-            }
-            
-        }
-
-
-        private void Pin22_Select_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Pin22_Select.Checked)
-            {
-                bits[0] += 8;
-            }
-                
-        }
-
-        private void Pin23_Select_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Pin23_Select.Checked)
-            { bits[0] += 4; }
-        }
-        private void Pin24_Select_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Pin24_Select.Checked)
-            { bits[0] += 2; }
-                
-        }
-
-        private void Pin25_Select_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Pin25_Select.Checked)
-            { bits[0] += 1; }
-        }
+       
     }
 }
