@@ -53,35 +53,27 @@ namespace Logic_Analyzer_App
 
         private void DigitalRead_Click(object sender, EventArgs e)
         {
-
-            DigOpen = this.IsMdiContainer;
-            if (!DigOpen & !string.IsNullOrEmpty(theCOM))
+            try
             {
-                Digital dig = new Digital(theCOM, DigOpen);
-                dig.StartPosition = FormStartPosition.CenterScreen;
-                dig.Show();
-                dig.DigOpen = true;
-                DigOpen = dig.DigOpen;
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    Digital dig = new Digital(theCOM, DigOpen);
+                    dig.StartPosition = FormStartPosition.CenterScreen;
+                    dig.Show();
 
-            }
-            else
-            {
-                if (PortOpen)
-                { 
-                    MessageBox.Show("Serial port connection already established.", "Serial Port Error"); 
-                }
-                else if (DigOpen)
-                {
-                    MessageBox.Show("Try exiting Digital Program", "Program already open");
-                }
-                else if (string.IsNullOrEmpty(theCOM))
-                {
-                    MessageBox.Show("Bad connection to serial port.", "Serial Port Error");
                 }
                 else
                 {
-                    //MessageBox.Show("Undescribed Behavior", "Undescribed Behavior");
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
                 }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error");
             }
         }
 

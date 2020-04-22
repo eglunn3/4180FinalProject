@@ -39,11 +39,11 @@
             this.Pin18_Select = new System.Windows.Forms.CheckBox();
             this.Pin19_Select = new System.Windows.Forms.CheckBox();
             this.Pin20_Select = new System.Windows.Forms.CheckBox();
-            this.textBox34 = new System.Windows.Forms.TextBox();
-            this.textBox167 = new System.Windows.Forms.TextBox();
-            this.textBox168 = new System.Windows.Forms.TextBox();
-            this.textBox169 = new System.Windows.Forms.TextBox();
-            this.textBox170 = new System.Windows.Forms.TextBox();
+            this.Pin16_Value = new System.Windows.Forms.TextBox();
+            this.Pin17_Value = new System.Windows.Forms.TextBox();
+            this.Pin18_Value = new System.Windows.Forms.TextBox();
+            this.Pin19_Value = new System.Windows.Forms.TextBox();
+            this.Pin20_Value = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Pin16_12 = new System.Windows.Forms.TextBox();
             this.Pin16_09 = new System.Windows.Forms.TextBox();
@@ -110,6 +110,10 @@
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // Port
+            // 
+            this.Port.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.CerealKiller);
             // 
             // StartButton
             // 
@@ -204,45 +208,45 @@
             this.Pin20_Select.Text = "Pin 20";
             this.Pin20_Select.UseVisualStyleBackColor = true;
             // 
-            // textBox34
+            // Pin16_Value
             // 
-            this.textBox34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox34.Location = new System.Drawing.Point(96, 603);
-            this.textBox34.Name = "textBox34";
-            this.textBox34.Size = new System.Drawing.Size(68, 49);
-            this.textBox34.TabIndex = 21;
+            this.Pin16_Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Pin16_Value.Location = new System.Drawing.Point(84, 598);
+            this.Pin16_Value.Name = "Pin16_Value";
+            this.Pin16_Value.Size = new System.Drawing.Size(90, 49);
+            this.Pin16_Value.TabIndex = 21;
             // 
-            // textBox167
+            // Pin17_Value
             // 
-            this.textBox167.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox167.Location = new System.Drawing.Point(308, 603);
-            this.textBox167.Name = "textBox167";
-            this.textBox167.Size = new System.Drawing.Size(68, 49);
-            this.textBox167.TabIndex = 37;
+            this.Pin17_Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Pin17_Value.Location = new System.Drawing.Point(297, 598);
+            this.Pin17_Value.Name = "Pin17_Value";
+            this.Pin17_Value.Size = new System.Drawing.Size(90, 49);
+            this.Pin17_Value.TabIndex = 37;
             // 
-            // textBox168
+            // Pin18_Value
             // 
-            this.textBox168.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox168.Location = new System.Drawing.Point(520, 603);
-            this.textBox168.Name = "textBox168";
-            this.textBox168.Size = new System.Drawing.Size(68, 49);
-            this.textBox168.TabIndex = 38;
+            this.Pin18_Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Pin18_Value.Location = new System.Drawing.Point(511, 598);
+            this.Pin18_Value.Name = "Pin18_Value";
+            this.Pin18_Value.Size = new System.Drawing.Size(90, 49);
+            this.Pin18_Value.TabIndex = 38;
             // 
-            // textBox169
+            // Pin19_Value
             // 
-            this.textBox169.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox169.Location = new System.Drawing.Point(732, 603);
-            this.textBox169.Name = "textBox169";
-            this.textBox169.Size = new System.Drawing.Size(68, 49);
-            this.textBox169.TabIndex = 39;
+            this.Pin19_Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Pin19_Value.Location = new System.Drawing.Point(725, 598);
+            this.Pin19_Value.Name = "Pin19_Value";
+            this.Pin19_Value.Size = new System.Drawing.Size(90, 49);
+            this.Pin19_Value.TabIndex = 39;
             // 
-            // textBox170
+            // Pin20_Value
             // 
-            this.textBox170.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox170.Location = new System.Drawing.Point(948, 603);
-            this.textBox170.Name = "textBox170";
-            this.textBox170.Size = new System.Drawing.Size(68, 49);
-            this.textBox170.TabIndex = 40;
+            this.Pin20_Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Pin20_Value.Location = new System.Drawing.Point(938, 598);
+            this.Pin20_Value.Name = "Pin20_Value";
+            this.Pin20_Value.Size = new System.Drawing.Size(90, 49);
+            this.Pin20_Value.TabIndex = 40;
             // 
             // groupBox2
             // 
@@ -845,11 +849,11 @@
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.textBox170);
-            this.Controls.Add(this.textBox169);
-            this.Controls.Add(this.textBox168);
-            this.Controls.Add(this.textBox167);
-            this.Controls.Add(this.textBox34);
+            this.Controls.Add(this.Pin20_Value);
+            this.Controls.Add(this.Pin19_Value);
+            this.Controls.Add(this.Pin18_Value);
+            this.Controls.Add(this.Pin17_Value);
+            this.Controls.Add(this.Pin16_Value);
             this.Controls.Add(this.Pin20_Select);
             this.Controls.Add(this.Pin19_Select);
             this.Controls.Add(this.Pin18_Select);
@@ -859,6 +863,7 @@
             this.Controls.Add(this.StartButton);
             this.Name = "Analog";
             this.Text = "Analog";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Analog_FormClosing);
             this.Load += new System.EventHandler(this.Analog_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -886,11 +891,11 @@
         private System.Windows.Forms.CheckBox Pin18_Select;
         private System.Windows.Forms.CheckBox Pin19_Select;
         private System.Windows.Forms.CheckBox Pin20_Select;
-        private System.Windows.Forms.TextBox textBox34;
-        private System.Windows.Forms.TextBox textBox167;
-        private System.Windows.Forms.TextBox textBox168;
-        private System.Windows.Forms.TextBox textBox169;
-        private System.Windows.Forms.TextBox textBox170;
+        private System.Windows.Forms.TextBox Pin16_Value;
+        private System.Windows.Forms.TextBox Pin17_Value;
+        private System.Windows.Forms.TextBox Pin18_Value;
+        private System.Windows.Forms.TextBox Pin19_Value;
+        private System.Windows.Forms.TextBox Pin20_Value;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox Pin16_33;
         private System.Windows.Forms.TextBox Pin16_30;

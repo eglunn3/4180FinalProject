@@ -17,7 +17,7 @@ namespace Logic_Analyzer_App
     public partial class Digital : Form
     {
         static SerialPort Port;
-        public bool DigOpen { get; set; }
+        
         byte[] bits = new byte[1] { 0 }; //string used for mbed communication
 
         public delegate void DisplaySerial(int mbedstuff);
@@ -61,7 +61,7 @@ namespace Logic_Analyzer_App
 
         private void Digital_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DigOpen = false;
+
             bits[0] = 0;
             Port.Write(bits, 0, 1);
             Port.Close();
