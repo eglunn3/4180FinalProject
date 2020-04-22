@@ -50,7 +50,7 @@
             // I2CSelect
             // 
             this.I2CSelect.Location = new System.Drawing.Point(102, 153);
-            this.I2CSelect.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.I2CSelect.Margin = new System.Windows.Forms.Padding(6);
             this.I2CSelect.Name = "I2CSelect";
             this.I2CSelect.Size = new System.Drawing.Size(109, 36);
             this.I2CSelect.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(102, 299);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(111, 24);
             this.comboBox1.TabIndex = 4;
@@ -71,7 +71,7 @@
             // PortSelectLabel
             // 
             this.PortSelectLabel.Location = new System.Drawing.Point(76, 265);
-            this.PortSelectLabel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.PortSelectLabel.Margin = new System.Windows.Forms.Padding(6);
             this.PortSelectLabel.Name = "PortSelectLabel";
             this.PortSelectLabel.ReadOnly = true;
             this.PortSelectLabel.Size = new System.Drawing.Size(172, 22);
@@ -92,7 +92,7 @@
             // AnalogSelect
             // 
             this.AnalogSelect.Location = new System.Drawing.Point(102, 91);
-            this.AnalogSelect.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.AnalogSelect.Margin = new System.Windows.Forms.Padding(6);
             this.AnalogSelect.Name = "AnalogSelect";
             this.AnalogSelect.Size = new System.Drawing.Size(109, 36);
             this.AnalogSelect.TabIndex = 7;
@@ -109,7 +109,7 @@
             this.PWMButton.TabIndex = 8;
             this.PWMButton.Text = "PWM";
             this.PWMButton.UseVisualStyleBackColor = true;
-            this.PWMButton.Click += new System.EventHandler(this.button1_Click);
+            this.PWMButton.Click += new System.EventHandler(this.PWMButton_Click);
             // 
             // MainMenu
             // 
