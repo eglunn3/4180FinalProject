@@ -88,19 +88,27 @@ namespace Logic_Analyzer_App
 
         private void I2CSelect_Click(object sender, EventArgs e)
         {
-            I2COpen = this.IsMdiContainer;
-            I2C i2c = new I2C();
-            i2c.Show();
-
-        }
-
-        private void SPISelect_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SerialSelect_Click(object sender, EventArgs e)
-        {
+            try
+            {
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    I2C I2CWindow = new I2C(theCOM);
+                    I2CWindow.StartPosition = FormStartPosition.CenterScreen;
+                    I2CWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this erorr. ");
+            }
 
         }
 
@@ -125,13 +133,33 @@ namespace Logic_Analyzer_App
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error");
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this erorr. ");
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void PWMButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    PWM PWMWindow = new PWM(theCOM);
+                    PWMWindow.StartPosition = FormStartPosition.CenterScreen;
+                    PWMWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this erorr. ");
+            }
         }
     }
 }
