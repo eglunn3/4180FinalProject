@@ -109,7 +109,7 @@
             this.PWMButton.Name = "PWMButton";
             this.PWMButton.Size = new System.Drawing.Size(218, 70);
             this.PWMButton.TabIndex = 8;
-            this.PWMButton.Text = "PWM";
+            this.PWMButton.Text = "Scope";
             this.PWMButton.UseVisualStyleBackColor = true;
             this.PWMButton.Click += new System.EventHandler(this.PWMButton_Click);
             // 
