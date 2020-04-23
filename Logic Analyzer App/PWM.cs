@@ -15,9 +15,9 @@ namespace Logic_Analyzer_App
         byte[] byteme = new byte[1] { 0 }; //string used for mbed communication
         public int count = 1;
         public bool IwasRunnin = false;
-        public delegate void DisplaySerial(ushort mbedstuff);
+        public delegate void DisplaySerial(int mbedstuff);
         public DisplaySerial mbedBAD;
-        List<UInt16> dygraph = new List<UInt16>();
+        List<int> dygraph = new List<int>();
         public PWM(string ComPort)
         {
             InitializeComponent();
@@ -25,7 +25,8 @@ namespace Logic_Analyzer_App
             mbedBAD = new DisplaySerial(SerialtoTextMethod);
             Port.Open();
             Port.Encoding = Encoding.GetEncoding(1252);
-            PWMDisplay.DataSource = dygraph; //Change to XY binding and disable X indexing when time implemented
+            PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
+            //PWMDisplay.DataSource = dygraph; //Change to XY binding and disable X indexing when time implemented
         }
         private void PWM_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -56,10 +57,10 @@ namespace Logic_Analyzer_App
             byteme[0] = 0;
             IwasRunnin = true;
         }
-        public void SerialtoTextMethod(ushort TheValue)
+        public void SerialtoTextMethod(int TheValue)
         {
             TheValue -= 40; 
-            if (TheValue > 1)
+          /*  if (TheValue > 1)
             {
                 MessageBox.Show("Invalid Number Received. Please make sure only using PWMs that range from 0 to 1.\nIf you are super sure you are, please file a bug report", "Error: Invalid Number!", MessageBoxButtons.OK);
                 IwasRunnin = false;
@@ -67,9 +68,9 @@ namespace Logic_Analyzer_App
                 Port.Write(byteme, 0, 1); 
                 Port.Close();
                 MessageBox.Show("Please restart the PWM window.", "PWM Restart", MessageBoxButtons.OK);
-            }
+            }*/
             dygraph.Add(TheValue);
-            PWMDisplay.DataBind();
+            PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
         }
         private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {

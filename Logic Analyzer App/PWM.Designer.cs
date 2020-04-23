@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.PWMDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Port = new System.IO.Ports.SerialPort(this.components);
             this.PWMStart = new System.Windows.Forms.Button();
@@ -41,21 +41,21 @@
             // 
             // PWMDisplay
             // 
-            chartArea3.BackColor = System.Drawing.Color.Black;
-            chartArea3.Name = "ChartArea1";
-            this.PWMDisplay.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.PWMDisplay.Legends.Add(legend3);
+            chartArea1.BackColor = System.Drawing.Color.Black;
+            chartArea1.Name = "ChartArea1";
+            this.PWMDisplay.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.PWMDisplay.Legends.Add(legend1);
             this.PWMDisplay.Location = new System.Drawing.Point(101, 29);
             this.PWMDisplay.Name = "PWMDisplay";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
-            series3.Color = System.Drawing.Color.Turquoise;
-            series3.IsXValueIndexed = true;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.PWMDisplay.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series1.Color = System.Drawing.Color.Turquoise;
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "PWMShow";
+            this.PWMDisplay.Series.Add(series1);
             this.PWMDisplay.Size = new System.Drawing.Size(746, 577);
             this.PWMDisplay.TabIndex = 0;
             this.PWMDisplay.Text = "PWM Display";
