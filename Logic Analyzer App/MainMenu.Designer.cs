@@ -40,7 +40,7 @@
             // DigitalRead
             // 
             this.DigitalRead.Location = new System.Drawing.Point(204, 54);
-            this.DigitalRead.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.DigitalRead.Margin = new System.Windows.Forms.Padding(6);
             this.DigitalRead.Name = "DigitalRead";
             this.DigitalRead.Size = new System.Drawing.Size(218, 70);
             this.DigitalRead.TabIndex = 0;
@@ -50,8 +50,8 @@
             // 
             // I2CSelect
             // 
-            this.I2CSelect.Location = new System.Drawing.Point(204, 296);
-            this.I2CSelect.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.I2CSelect.Location = new System.Drawing.Point(204, 420);
+            this.I2CSelect.Margin = new System.Windows.Forms.Padding(12);
             this.I2CSelect.Name = "I2CSelect";
             this.I2CSelect.Size = new System.Drawing.Size(218, 70);
             this.I2CSelect.TabIndex = 1;
@@ -63,7 +63,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(204, 579);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(218, 39);
             this.comboBox1.TabIndex = 4;
@@ -72,7 +72,7 @@
             // PortSelectLabel
             // 
             this.PortSelectLabel.Location = new System.Drawing.Point(152, 513);
-            this.PortSelectLabel.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.PortSelectLabel.Margin = new System.Windows.Forms.Padding(12);
             this.PortSelectLabel.Name = "PortSelectLabel";
             this.PortSelectLabel.ReadOnly = true;
             this.PortSelectLabel.Size = new System.Drawing.Size(340, 38);
@@ -82,7 +82,7 @@
             // InfoBox
             // 
             this.InfoBox.Location = new System.Drawing.Point(16, 661);
-            this.InfoBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.InfoBox.Margin = new System.Windows.Forms.Padding(6);
             this.InfoBox.Name = "InfoBox";
             this.InfoBox.ReadOnly = true;
             this.InfoBox.Size = new System.Drawing.Size(590, 200);
@@ -94,7 +94,7 @@
             // AnalogSelect
             // 
             this.AnalogSelect.Location = new System.Drawing.Point(204, 176);
-            this.AnalogSelect.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.AnalogSelect.Margin = new System.Windows.Forms.Padding(12);
             this.AnalogSelect.Name = "AnalogSelect";
             this.AnalogSelect.Size = new System.Drawing.Size(218, 70);
             this.AnalogSelect.TabIndex = 7;
@@ -104,8 +104,8 @@
             // 
             // PWMButton
             // 
-            this.PWMButton.Location = new System.Drawing.Point(204, 420);
-            this.PWMButton.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.PWMButton.Location = new System.Drawing.Point(204, 296);
+            this.PWMButton.Margin = new System.Windows.Forms.Padding(12);
             this.PWMButton.Name = "PWMButton";
             this.PWMButton.Size = new System.Drawing.Size(218, 70);
             this.PWMButton.TabIndex = 8;
