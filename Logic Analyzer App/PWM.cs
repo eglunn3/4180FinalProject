@@ -12,12 +12,69 @@ namespace Logic_Analyzer_App
 {
     public partial class PWM : Form
     {
+        byte[] byteme = new byte[1] { 0 }; //string used for mbed communication
+        public int count = 1;
+        public bool IwasRunnin = false;
+        public delegate void DisplaySerial(int mbedstuff);
+        public DisplaySerial mbedBAD;
+        List<int> dygraph = new List<int>();
         public PWM(string ComPort)
         {
             InitializeComponent();
-            
             Port.PortName = ComPort;
+            mbedBAD = new DisplaySerial(SerialtoTextMethod);
             Port.Open();
+            Port.Encoding = Encoding.GetEncoding(1252);
+            PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
+            //PWMDisplay.DataSource = dygraph; //Change to XY binding and disable X indexing when time implemented
+        }
+        private void PWM_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            if (IwasRunnin)
+            {
+                // Display a MsgBox asking the user to save changes or abort.
+                if (MessageBox.Show("The analog read is still running. Do you want to close the form?", "Close Analog Application",
+                   MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    // Cancel the Closing event from closing the form.
+                    e.Cancel = true;
+                    // Call method to save file...
+                }
+                else
+                {
+                    byteme[0] = 0;
+                    Port.Write(byteme, 0, 1); //sends reset value before the window closes
+                    Port.Close();
+                }
+            }
+        }
+
+        private void PWMStart_Click(object sender, EventArgs e)
+        {
+            byteme[0] += 128;
+            Port.Write(byteme, 0, 1); //Writing PWM selection to MBED
+            byteme[0] = 0;
+            IwasRunnin = true;
+        }
+        public void SerialtoTextMethod(int TheValue)
+        {
+            TheValue -= 40; 
+          /*  if (TheValue > 1)
+            {
+                MessageBox.Show("Invalid Number Received. Please make sure only using PWMs that range from 0 to 1.\nIf you are super sure you are, please file a bug report", "Error: Invalid Number!", MessageBoxButtons.OK);
+                IwasRunnin = false;
+                byteme[0] = 0;
+                Port.Write(byteme, 0, 1); 
+                Port.Close();
+                MessageBox.Show("Please restart the PWM window.", "PWM Restart", MessageBoxButtons.OK);
+            }*/
+            dygraph.Add(TheValue);
+            PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
+        }
+        private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            Invoke(mbedBAD, Port.ReadChar());
         }
     }
 }
