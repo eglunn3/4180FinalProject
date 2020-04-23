@@ -39,9 +39,10 @@
             // 
             // DigitalRead
             // 
-            this.DigitalRead.Location = new System.Drawing.Point(102, 28);
+            this.DigitalRead.Location = new System.Drawing.Point(204, 54);
+            this.DigitalRead.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.DigitalRead.Name = "DigitalRead";
-            this.DigitalRead.Size = new System.Drawing.Size(109, 36);
+            this.DigitalRead.Size = new System.Drawing.Size(218, 70);
             this.DigitalRead.TabIndex = 0;
             this.DigitalRead.Text = "Digital ";
             this.DigitalRead.UseVisualStyleBackColor = true;
@@ -49,10 +50,10 @@
             // 
             // I2CSelect
             // 
-            this.I2CSelect.Location = new System.Drawing.Point(102, 153);
-            this.I2CSelect.Margin = new System.Windows.Forms.Padding(6);
+            this.I2CSelect.Location = new System.Drawing.Point(204, 296);
+            this.I2CSelect.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.I2CSelect.Name = "I2CSelect";
-            this.I2CSelect.Size = new System.Drawing.Size(109, 36);
+            this.I2CSelect.Size = new System.Drawing.Size(218, 70);
             this.I2CSelect.TabIndex = 1;
             this.I2CSelect.Text = "I2C";
             this.I2CSelect.UseVisualStyleBackColor = true;
@@ -61,40 +62,41 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(102, 299);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.comboBox1.Location = new System.Drawing.Point(204, 579);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(111, 24);
+            this.comboBox1.Size = new System.Drawing.Size(218, 39);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // PortSelectLabel
             // 
-            this.PortSelectLabel.Location = new System.Drawing.Point(76, 265);
-            this.PortSelectLabel.Margin = new System.Windows.Forms.Padding(6);
+            this.PortSelectLabel.Location = new System.Drawing.Point(152, 513);
+            this.PortSelectLabel.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.PortSelectLabel.Name = "PortSelectLabel";
             this.PortSelectLabel.ReadOnly = true;
-            this.PortSelectLabel.Size = new System.Drawing.Size(172, 22);
+            this.PortSelectLabel.Size = new System.Drawing.Size(340, 38);
             this.PortSelectLabel.TabIndex = 5;
             this.PortSelectLabel.Text = "Select Serial Port for Mbed";
             // 
             // InfoBox
             // 
-            this.InfoBox.Location = new System.Drawing.Point(8, 341);
+            this.InfoBox.Location = new System.Drawing.Point(16, 661);
+            this.InfoBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.InfoBox.Name = "InfoBox";
             this.InfoBox.ReadOnly = true;
-            this.InfoBox.Size = new System.Drawing.Size(297, 97);
+            this.InfoBox.Size = new System.Drawing.Size(590, 200);
             this.InfoBox.TabIndex = 6;
-            this.InfoBox.Text = "Copyright 2020 under MIT License\nAuthors: eglunn3, sagebrush1111, <insert other a" +
-    "uthors>\nWebsite for issues, comments, updates: \nhttps://github.com/eglunn3/4180F" +
-    "inalProject";
+            this.InfoBox.Text = "Copyright 2020 under MIT License\nAuthors: eglunn3, sagebrush1111, hovell3, and rd" +
+    "obbs6\nWebsite for issues, comments, updates: \nhttps://github.com/eglunn3/MBED-Lo" +
+    "gic-Analyzer";
             // 
             // AnalogSelect
             // 
-            this.AnalogSelect.Location = new System.Drawing.Point(102, 91);
-            this.AnalogSelect.Margin = new System.Windows.Forms.Padding(6);
+            this.AnalogSelect.Location = new System.Drawing.Point(204, 176);
+            this.AnalogSelect.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.AnalogSelect.Name = "AnalogSelect";
-            this.AnalogSelect.Size = new System.Drawing.Size(109, 36);
+            this.AnalogSelect.Size = new System.Drawing.Size(218, 70);
             this.AnalogSelect.TabIndex = 7;
             this.AnalogSelect.Text = "Analog";
             this.AnalogSelect.UseVisualStyleBackColor = true;
@@ -102,10 +104,10 @@
             // 
             // PWMButton
             // 
-            this.PWMButton.Location = new System.Drawing.Point(102, 217);
-            this.PWMButton.Margin = new System.Windows.Forms.Padding(6);
+            this.PWMButton.Location = new System.Drawing.Point(204, 420);
+            this.PWMButton.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.PWMButton.Name = "PWMButton";
-            this.PWMButton.Size = new System.Drawing.Size(109, 36);
+            this.PWMButton.Size = new System.Drawing.Size(218, 70);
             this.PWMButton.TabIndex = 8;
             this.PWMButton.Text = "PWM";
             this.PWMButton.UseVisualStyleBackColor = true;
@@ -113,9 +115,9 @@
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 463);
+            this.ClientSize = new System.Drawing.Size(626, 897);
             this.Controls.Add(this.PWMButton);
             this.Controls.Add(this.AnalogSelect);
             this.Controls.Add(this.InfoBox);
@@ -123,7 +125,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.I2CSelect);
             this.Controls.Add(this.DigitalRead);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "MainMenu";
             this.Text = "Logic Analyzer Menu";
             this.ResumeLayout(false);
