@@ -27,7 +27,6 @@ namespace Logic_Analyzer_App
             InitializeComponent();
             mbedBAD = new DisplaySerial(SerialtoTextMethod);
             Port.PortName = ComPort;
-            
             Port.Open();
             Port.Encoding = Encoding.GetEncoding(1252);
             //Port.DataReceived += new SerialDataReceivedEventHandler(CerealKiller);
