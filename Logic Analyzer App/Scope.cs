@@ -53,11 +53,7 @@ namespace Logic_Analyzer_App
         private void PWMStart_Click(object sender, EventArgs e)
         {
             byteme[0] += 128;
-            if (Int32.Parse(TrigVoltEnter.Text) > 3.3)
-            {
-                MessageBox.Show("Invalid Trigger Value. Try again from 0 to 3.3 V", "Error: Invalid Choice", MessageBoxButtons.OK);
-                return;
-            }
+            
             switch (ScopeTimeSelect.SelectedIndex)
             {
                 case 0: byteme[0] += 0; break;
