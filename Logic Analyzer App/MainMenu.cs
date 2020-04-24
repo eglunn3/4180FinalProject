@@ -135,9 +135,9 @@ namespace Logic_Analyzer_App
             {
                 if (!string.IsNullOrEmpty(theCOM))
                 {
-                    Scope PWMWindow = new Scope(theCOM);
-                    PWMWindow.StartPosition = FormStartPosition.CenterScreen;
-                    PWMWindow.Show();
+                    Scope ScopeWindow = new Scope(theCOM);
+                    ScopeWindow.StartPosition = FormStartPosition.CenterScreen;
+                    ScopeWindow.Show();
                 }
                 else
                 {

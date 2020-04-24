@@ -53,6 +53,27 @@ namespace Logic_Analyzer_App
         private void PWMStart_Click(object sender, EventArgs e)
         {
             byteme[0] += 128;
+            if (Int32.Parse(TrigVoltEnter.Text) > 3.3)
+            {
+                MessageBox.Show("Invalid Trigger Value. Try again from 0 to 3.3 V", "Error: Invalid Choice", MessageBoxButtons.OK);
+                return;
+            }
+            switch (ScopeTimeSelect.SelectedIndex)
+            {
+                case 0: byteme[0] += 0; break;
+                case 1: byteme[0] += 1; break;
+                case 2: byteme[0] += 2; break;
+                case 3: byteme[0] += 3; break;
+                case 4: byteme[0] += 4; break;
+                case 5: byteme[0] += 5; break;
+                case 6: byteme[0] += 6; break;
+                case 7: byteme[0] += 7; break;
+            }
+            switch (RFChoice.SelectedIndex)
+            {
+                case 0: byteme[0] += 16; break;
+                case 1: byteme[0] += 0;  break; 
+            }
             Port.Write(byteme, 0, 1); //Writing PWM selection to MBED
             byteme[0] = 0;
             IwasRunnin = true;
@@ -76,5 +97,6 @@ namespace Logic_Analyzer_App
         {
             Invoke(mbedBAD, Port.ReadChar());
         }
+
     }
 }
