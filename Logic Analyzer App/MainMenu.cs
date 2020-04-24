@@ -44,8 +44,15 @@ namespace Logic_Analyzer_App
             }
             else
             {
-                numberCOM = comboBox1.SelectedIndex;
-                theCOM = portnames[numberCOM];
+                try
+                {
+                    numberCOM = comboBox1.SelectedIndex;
+                    theCOM = portnames[numberCOM];
+                } 
+                catch
+                {
+                    MessageBox.Show("Please restart the program. You have inserted a serial device while the program is running, which causes problems.\nPlease remember to always insert whatever device you want to use before the program starts.", "Error: Invalid Serial Operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 
 
             }

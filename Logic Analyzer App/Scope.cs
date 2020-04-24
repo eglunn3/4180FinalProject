@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//TODO: Timer for when to turn off IwasRunning
+//TODO: Double check IwasRunning turn off
 namespace Logic_Analyzer_App
 {
     public partial class Scope : Form
@@ -18,7 +18,10 @@ namespace Logic_Analyzer_App
         delegate void DisplaySerial(int mbedstuff);
         DisplaySerial mbedBAD;
         List<float> dygraph = new List<float>();
-        bool StopThePresses = false; 
+        List<float> time = new List<float>(); 
+        bool StopThePresses = false;
+        float timespace = 0.0f;
+        bool FirstCereal = true;
         public Scope(string ComPort)
         {
             InitializeComponent();
@@ -26,7 +29,7 @@ namespace Logic_Analyzer_App
             mbedBAD = new DisplaySerial(SerialtoTextMethod);
             Port.Open();
             Port.Encoding = Encoding.GetEncoding(1252);
-            PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
+            ScopeDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
             //PWMDisplay.DataSource = dygraph; //Change to XY binding and disable X indexing when time implemented
         }
         private void PWM_FormClosing(object sender, FormClosingEventArgs e)
@@ -44,9 +47,17 @@ namespace Logic_Analyzer_App
                 }
                 else
                 {
-                    byteme[0] = 0;
-                    Port.Write(byteme, 0, 1); //sends reset value before the window closes
-                    Port.Close();
+                    try
+                    {
+                        byteme[0] = 0;
+                        Port.Write(byteme, 0, 1); //sends reset value before the window closes
+                        Port.Close();
+                    }
+                    catch
+                    {
+                        byteme[0] = 0;
+                        Port.Close();
+                    }
                 }
             }
         }
@@ -68,14 +79,14 @@ namespace Logic_Analyzer_App
             
             switch (ScopeTimeSelect.SelectedIndex)
             {
-                case 0: byteme[0] += 0; break;
-                case 1: byteme[0] += 1; break;
-                case 2: byteme[0] += 2; break;
-                case 3: byteme[0] += 3; break;
-                case 4: byteme[0] += 4; break;
-                case 5: byteme[0] += 5; break;
-                case 6: byteme[0] += 6; break;
-                case 7: byteme[0] += 7; break;
+                case 0: byteme[0] += 0; timespace = 0.001f;  break;
+                case 1: byteme[0] += 1; timespace = 0.005f;  break;
+                case 2: byteme[0] += 2; timespace = 0.01f;   break;
+                case 3: byteme[0] += 3; timespace = 0.05f;   break;
+                case 4: byteme[0] += 4; timespace = 0.1f;    break;
+                case 5: byteme[0] += 5; timespace = 0.25f;   break;
+                case 6: byteme[0] += 6; timespace = 0.5f;    break;
+                case 7: byteme[0] += 7; timespace = 1.0f;    break;
                 default: MessageBox.Show("Please Select a Time Duration.", "Error: No Time Duration Selected.", MessageBoxButtons.OK, MessageBoxIcon.Error); return;  break;
             }
             switch (RFChoice.SelectedIndex)
@@ -95,13 +106,40 @@ namespace Logic_Analyzer_App
             byteme[0] = 0;
             IwasRunnin = true;
             StopThePresses = false;
+            FirstCereal = true;
         }
         public void SerialtoTextMethod(int TheValue)
         {
             float temp = 0;
-            temp=((float)TheValue/254.0f)*3.3f; 
-            dygraph.Add(temp);
-            PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
+            temp=((float)TheValue/254.0f)*3.3f;
+            if (temp > 3.3)
+            {
+                try
+                {
+                    dygraph.Add(dygraph[dygraph.Count - 1]);
+                } 
+                catch
+                {
+                    dygraph.Add(0.0f);
+                }
+            }
+            else
+            {
+                dygraph.Add(temp);
+            }
+            if (FirstCereal)
+            {
+                time.Add(0);
+                FirstCereal = false;
+            } else
+            {
+                time.Add(time[time.Count - 1] + timespace);
+            }
+            ScopeDisplay.Series["ScopeShow"].Points.DataBindXY(time,dygraph);
+            if (Port.BytesToRead == 0)
+            {
+                IwasRunnin = false;
+            }
         }
         private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
@@ -118,10 +156,9 @@ namespace Logic_Analyzer_App
                 return;
             }
             if (Port.BytesToRead == 0)
-            {
-                IwasRunnin = false;
-            }
+            
             Invoke(mbedBAD, Port.ReadChar());
+           
         }
 
         private void PWMStop_Click(object sender, EventArgs e)
@@ -129,15 +166,18 @@ namespace Logic_Analyzer_App
             StopThePresses = true;
             MessageBox.Show("You have stopped the gathering and showing of data; please hold for the MBED to reset.", "Information: Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             byteme[0] = 0;
+            IwasRunnin = false;
             dygraph.Clear();
+            dygraph.TrimExcess();
             try
             {
                 Port.Write(byteme, 0, 1);
             }
             catch
             {
-                
+                MessageBox.Show("Error: MBED could not be reset.", "Error: Failed Reset", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            FirstCereal = false;
         }
     }
 }

@@ -32,36 +32,35 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.PWMDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.ScopeDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Port = new System.IO.Ports.SerialPort(this.components);
             this.PWMStart = new System.Windows.Forms.Button();
             this.PWMStop = new System.Windows.Forms.Button();
             this.ScopeTimeSelect = new System.Windows.Forms.ComboBox();
             this.RFChoice = new System.Windows.Forms.ComboBox();
             this.ScopePinInfo = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.PWMDisplay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScopeDisplay)).BeginInit();
             this.SuspendLayout();
             // 
-            // PWMDisplay
+            // ScopeDisplay
             // 
             chartArea1.BackColor = System.Drawing.Color.Black;
             chartArea1.Name = "ChartArea1";
-            this.PWMDisplay.ChartAreas.Add(chartArea1);
+            this.ScopeDisplay.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
             legend1.Name = "Legend1";
-            this.PWMDisplay.Legends.Add(legend1);
-            this.PWMDisplay.Location = new System.Drawing.Point(101, 29);
-            this.PWMDisplay.Name = "PWMDisplay";
+            this.ScopeDisplay.Legends.Add(legend1);
+            this.ScopeDisplay.Location = new System.Drawing.Point(101, 29);
+            this.ScopeDisplay.Name = "ScopeDisplay";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Color = System.Drawing.Color.Turquoise;
-            series1.IsXValueIndexed = true;
             series1.Legend = "Legend1";
-            series1.Name = "PWMShow";
-            this.PWMDisplay.Series.Add(series1);
-            this.PWMDisplay.Size = new System.Drawing.Size(746, 577);
-            this.PWMDisplay.TabIndex = 0;
-            this.PWMDisplay.Text = "PWM Display";
+            series1.Name = "ScopeShow";
+            this.ScopeDisplay.Series.Add(series1);
+            this.ScopeDisplay.Size = new System.Drawing.Size(746, 577);
+            this.ScopeDisplay.TabIndex = 0;
+            this.ScopeDisplay.Text = "Scope Display";
             // 
             // Port
             // 
@@ -136,18 +135,18 @@
             this.Controls.Add(this.ScopeTimeSelect);
             this.Controls.Add(this.PWMStop);
             this.Controls.Add(this.PWMStart);
-            this.Controls.Add(this.PWMDisplay);
+            this.Controls.Add(this.ScopeDisplay);
             this.Name = "Scope";
             this.Text = "Scope";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PWM_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.PWMDisplay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScopeDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.DataVisualization.Charting.Chart PWMDisplay;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ScopeDisplay;
         private System.IO.Ports.SerialPort Port;
         private System.Windows.Forms.Button PWMStart;
         private System.Windows.Forms.Button PWMStop;
