@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//TODO: Timer for when to turn off IwasRunning and rest automatically for user
+//TODO: Timer for when to turn off IwasRunning
 namespace Logic_Analyzer_App
 {
     public partial class Scope : Form
@@ -17,7 +17,7 @@ namespace Logic_Analyzer_App
         bool IwasRunnin = false;
         delegate void DisplaySerial(int mbedstuff);
         DisplaySerial mbedBAD;
-        List<int> dygraph = new List<int>();
+        List<float> dygraph = new List<float>();
         bool StopThePresses = false; 
         public Scope(string ComPort)
         {
@@ -53,6 +53,17 @@ namespace Logic_Analyzer_App
 
         private void PWMStart_Click(object sender, EventArgs e)
         {
+            byteme[0] = 0;
+            dygraph.Clear();
+            try
+            {
+                Port.Write(byteme, 0, 1);
+            }
+            catch
+            {
+                MessageBox.Show("Error: Serial Port Down. Did you disconnect the MBED?", "Error: MBED Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             byteme[0] += 128;
             
             switch (ScopeTimeSelect.SelectedIndex)
@@ -87,8 +98,9 @@ namespace Logic_Analyzer_App
         }
         public void SerialtoTextMethod(int TheValue)
         {
-            TheValue/=254; 
-            dygraph.Add(TheValue);
+            float temp = 0;
+            temp=((float)TheValue/254.0f)*3.3f; 
+            dygraph.Add(temp);
             PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
         }
         private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -105,7 +117,10 @@ namespace Logic_Analyzer_App
                 }
                 return;
             }
-            IwasRunnin = false;
+            if (Port.BytesToRead == 0)
+            {
+                IwasRunnin = false;
+            }
             Invoke(mbedBAD, Port.ReadChar());
         }
 
@@ -121,7 +136,7 @@ namespace Logic_Analyzer_App
             }
             catch
             {
-                MessageBox.Show("Error: Serial Port Down. Did you disconnect the MBED?", "Error: MBED Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
         }
     }

@@ -53,7 +53,7 @@
             this.PWMDisplay.Location = new System.Drawing.Point(101, 29);
             this.PWMDisplay.Name = "PWMDisplay";
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Color = System.Drawing.Color.Turquoise;
             series1.IsXValueIndexed = true;
             series1.Legend = "Legend1";
