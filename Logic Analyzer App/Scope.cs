@@ -13,14 +13,13 @@ namespace Logic_Analyzer_App
     public partial class Scope : Form
     {
         byte[] byteme = new byte[1] { 0 }; //string used for mbed communication
-        int count = 1;
         bool IwasRunnin = false;
         delegate void DisplaySerial(int mbedstuff);
         DisplaySerial mbedBAD;
-        List<float> dygraph = new List<float>();
-        List<float> time = new List<float>(); 
+        List<double> dygraph = new List<double>();
+        List<double> time = new List<double>(); 
         bool StopThePresses = false;
-        float timespace = 0.0f;
+        double timespace = 0.0;
         bool FirstCereal = true;
         public Scope(string ComPort)
         {
@@ -29,12 +28,15 @@ namespace Logic_Analyzer_App
             mbedBAD = new DisplaySerial(SerialtoTextMethod);
             Port.Open();
             Port.Encoding = Encoding.GetEncoding(1252);
-            ScopeDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
-            //PWMDisplay.DataSource = dygraph; //Change to XY binding and disable X indexing when time implemented
+            Port.ReceivedBytesThreshold = 1; 
         }
         private void PWM_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            MessageBox.Show(Port.BytesToRead.ToString());
+            if (Port.BytesToRead < 1)
+            {
+                IwasRunnin = false;
+            }
             if (IwasRunnin)
             {
                 // Display a MsgBox asking the user to save changes or abort.
@@ -79,14 +81,14 @@ namespace Logic_Analyzer_App
             
             switch (ScopeTimeSelect.SelectedIndex)
             {
-                case 0: byteme[0] += 0; timespace = 0.001f;  break;
-                case 1: byteme[0] += 1; timespace = 0.005f;  break;
-                case 2: byteme[0] += 2; timespace = 0.01f;   break;
-                case 3: byteme[0] += 3; timespace = 0.05f;   break;
-                case 4: byteme[0] += 4; timespace = 0.1f;    break;
-                case 5: byteme[0] += 5; timespace = 0.25f;   break;
-                case 6: byteme[0] += 6; timespace = 0.5f;    break;
-                case 7: byteme[0] += 7; timespace = 1.0f;    break;
+                case 0: byteme[0] += 0; timespace = 0.001;  break;
+                case 1: byteme[0] += 1; timespace = 0.005;  break;
+                case 2: byteme[0] += 2; timespace = 0.01;   break;
+                case 3: byteme[0] += 3; timespace = 0.05;   break;
+                case 4: byteme[0] += 4; timespace = 0.1;    break;
+                case 5: byteme[0] += 5; timespace = 0.25;   break;
+                case 6: byteme[0] += 6; timespace = 0.5;    break;
+                case 7: byteme[0] += 7; timespace = 1.0;    break;
                 default: MessageBox.Show("Please Select a Time Duration.", "Error: No Time Duration Selected.", MessageBoxButtons.OK, MessageBoxIcon.Error); return;  break;
             }
             switch (RFChoice.SelectedIndex)
@@ -110,8 +112,8 @@ namespace Logic_Analyzer_App
         }
         public void SerialtoTextMethod(int TheValue)
         {
-            float temp = 0;
-            temp=((float)TheValue/254.0f)*3.3f;
+            double temp = 0;
+            temp=((double)TheValue/254.0)*3.3;
             if (temp > 3.3)
             {
                 try
@@ -120,7 +122,7 @@ namespace Logic_Analyzer_App
                 } 
                 catch
                 {
-                    dygraph.Add(0.0f);
+                    dygraph.Add(0);
                 }
             }
             else
@@ -134,12 +136,12 @@ namespace Logic_Analyzer_App
             } else
             {
                 time.Add(time[time.Count - 1] + timespace);
+            } 
+            if (time.Count != dygraph.Count)
+            {
+                MessageBox.Show("Critical error: Mismatch of time/dygraph");
             }
             ScopeDisplay.Series["ScopeShow"].Points.DataBindXY(time,dygraph);
-            if (Port.BytesToRead == 0)
-            {
-                IwasRunnin = false;
-            }
         }
         private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
@@ -155,7 +157,6 @@ namespace Logic_Analyzer_App
                 }
                 return;
             }
-            if (Port.BytesToRead == 0)
             
             Invoke(mbedBAD, Port.ReadChar());
            

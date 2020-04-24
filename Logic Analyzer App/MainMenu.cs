@@ -80,7 +80,7 @@ namespace Logic_Analyzer_App
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error");
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -106,7 +106,7 @@ namespace Logic_Analyzer_App
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this erorr. ");
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -132,7 +132,7 @@ namespace Logic_Analyzer_App
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this erorr. ");
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -157,7 +157,7 @@ namespace Logic_Analyzer_App
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this erorr. ");
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
     }
