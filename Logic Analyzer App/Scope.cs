@@ -36,7 +36,7 @@ namespace Logic_Analyzer_App
             {
                 // Display a MsgBox asking the user to save changes or abort.
                 if (MessageBox.Show("The scope is still running. Do you want to close the form?", "Close Scope Application",
-                   MessageBoxButtons.YesNo) == DialogResult.No)
+                   MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No)
                 {
                     // Cancel the Closing event from closing the form.
                     e.Cancel = true;
@@ -65,15 +65,22 @@ namespace Logic_Analyzer_App
                 case 5: byteme[0] += 5; break;
                 case 6: byteme[0] += 6; break;
                 case 7: byteme[0] += 7; break;
-                default: MessageBox.Show("Please Select a Time Duration.", "Error: No Time Duration Selected.", MessageBoxButtons.OK); return;  break;
+                default: MessageBox.Show("Please Select a Time Duration.", "Error: No Time Duration Selected.", MessageBoxButtons.OK, MessageBoxIcon.Error); return;  break;
             }
             switch (RFChoice.SelectedIndex)
             {
                 case 0: byteme[0] += 16; break;
                 case 1: byteme[0] += 0;  break;
-                default: MessageBox.Show("Please Select a Trigger.", "Error: No Trigger Selected.", MessageBoxButtons.OK); return;  break;
+                default: MessageBox.Show("Please Select a Trigger.", "Error: No Trigger Selected.", MessageBoxButtons.OK, MessageBoxIcon.Error); return;  break;
             }
-            Port.Write(byteme, 0, 1); //Writing PWM selection to MBED
+            try
+            {
+                Port.Write(byteme, 0, 1); //Writing PWM selection to MBED
+            }
+            catch
+            {
+                MessageBox.Show("Error: Serial Port Down. Did you disconnect the MBED?", "Error: MBED Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             byteme[0] = 0;
             IwasRunnin = true;
             StopThePresses = false;
@@ -88,7 +95,14 @@ namespace Logic_Analyzer_App
         {
             if (StopThePresses)
             {
-                Port.ReadChar(); //Dumping the data; the user doesn't care
+                try
+                {
+                    Port.ReadChar(); //Dumping the data; the user doesn't care
+                }
+                catch
+                {
+                    return; //Assuming mbed disconnected why stop issued
+                }
                 return;
             }
             IwasRunnin = false;
@@ -98,9 +112,17 @@ namespace Logic_Analyzer_App
         private void PWMStop_Click(object sender, EventArgs e)
         {
             StopThePresses = true;
-            MessageBox.Show("You have stopped the gathering and showing of data; please hold for the MBED to reset.", "Information: Stop", MessageBoxButtons.OK);
+            MessageBox.Show("You have stopped the gathering and showing of data; please hold for the MBED to reset.", "Information: Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);
             byteme[0] = 0;
-            Port.Write(byteme, 0, 1);
+            dygraph.Clear();
+            try
+            {
+                Port.Write(byteme, 0, 1);
+            }
+            catch
+            {
+                MessageBox.Show("Error: Serial Port Down. Did you disconnect the MBED?", "Error: MBED Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
