@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Logic_Analyzer_App
 {
-    public partial class PWM : Form
+    public partial class Scope : Form
     {
         byte[] byteme = new byte[1] { 0 }; //string used for mbed communication
         public int count = 1;
@@ -18,7 +18,7 @@ namespace Logic_Analyzer_App
         public delegate void DisplaySerial(int mbedstuff);
         public DisplaySerial mbedBAD;
         List<int> dygraph = new List<int>();
-        public PWM(string ComPort)
+        public Scope(string ComPort)
         {
             InitializeComponent();
             Port.PortName = ComPort;

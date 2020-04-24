@@ -1,6 +1,6 @@
 ﻿namespace Logic_Analyzer_App
 {
-    partial class PWM
+    partial class Scope
     {
         /// <summary>
         /// Required designer variable.
