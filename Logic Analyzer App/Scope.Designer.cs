@@ -29,35 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.PWMDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Port = new System.IO.Ports.SerialPort(this.components);
             this.PWMStart = new System.Windows.Forms.Button();
             this.PWMStop = new System.Windows.Forms.Button();
             this.ScopeTimeSelect = new System.Windows.Forms.ComboBox();
             this.RFChoice = new System.Windows.Forms.ComboBox();
+            this.ScopePinInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PWMDisplay)).BeginInit();
             this.SuspendLayout();
             // 
             // PWMDisplay
             // 
-            chartArea3.BackColor = System.Drawing.Color.Black;
-            chartArea3.Name = "ChartArea1";
-            this.PWMDisplay.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.PWMDisplay.Legends.Add(legend3);
+            chartArea1.BackColor = System.Drawing.Color.Black;
+            chartArea1.Name = "ChartArea1";
+            this.PWMDisplay.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.PWMDisplay.Legends.Add(legend1);
             this.PWMDisplay.Location = new System.Drawing.Point(101, 29);
             this.PWMDisplay.Name = "PWMDisplay";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
-            series3.Color = System.Drawing.Color.Turquoise;
-            series3.IsXValueIndexed = true;
-            series3.Legend = "Legend1";
-            series3.Name = "PWMShow";
-            this.PWMDisplay.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series1.Color = System.Drawing.Color.Turquoise;
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "PWMShow";
+            this.PWMDisplay.Series.Add(series1);
             this.PWMDisplay.Size = new System.Drawing.Size(746, 577);
             this.PWMDisplay.TabIndex = 0;
             this.PWMDisplay.Text = "PWM Display";
@@ -84,6 +85,7 @@
             this.PWMStop.TabIndex = 2;
             this.PWMStop.Text = "Stop";
             this.PWMStop.UseVisualStyleBackColor = true;
+            this.PWMStop.Click += new System.EventHandler(this.PWMStop_Click);
             // 
             // ScopeTimeSelect
             // 
@@ -115,11 +117,21 @@
             this.RFChoice.TabIndex = 8;
             this.RFChoice.Text = "Rise or Fall?";
             // 
+            // ScopePinInfo
+            // 
+            this.ScopePinInfo.AutoSize = true;
+            this.ScopePinInfo.Location = new System.Drawing.Point(241, 701);
+            this.ScopePinInfo.Name = "ScopePinInfo";
+            this.ScopePinInfo.Size = new System.Drawing.Size(131, 17);
+            this.ScopePinInfo.TabIndex = 9;
+            this.ScopePinInfo.Text = "Use P16 for Scope.";
+            // 
             // Scope
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(991, 727);
+            this.Controls.Add(this.ScopePinInfo);
             this.Controls.Add(this.RFChoice);
             this.Controls.Add(this.ScopeTimeSelect);
             this.Controls.Add(this.PWMStop);
@@ -130,6 +142,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PWM_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PWMDisplay)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -140,5 +153,6 @@
         private System.Windows.Forms.Button PWMStop;
         private System.Windows.Forms.ComboBox ScopeTimeSelect;
         private System.Windows.Forms.ComboBox RFChoice;
+        private System.Windows.Forms.Label ScopePinInfo;
     }
 }

@@ -7,17 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//TODO: Timer for when to turn off IwasRunning and rest automatically for user
 namespace Logic_Analyzer_App
 {
     public partial class Scope : Form
     {
         byte[] byteme = new byte[1] { 0 }; //string used for mbed communication
-        public int count = 1;
-        public bool IwasRunnin = false;
-        public delegate void DisplaySerial(int mbedstuff);
-        public DisplaySerial mbedBAD;
+        int count = 1;
+        bool IwasRunnin = false;
+        delegate void DisplaySerial(int mbedstuff);
+        DisplaySerial mbedBAD;
         List<int> dygraph = new List<int>();
+        bool StopThePresses = false; 
         public Scope(string ComPort)
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace Logic_Analyzer_App
             if (IwasRunnin)
             {
                 // Display a MsgBox asking the user to save changes or abort.
-                if (MessageBox.Show("The analog read is still running. Do you want to close the form?", "Close Analog Application",
+                if (MessageBox.Show("The scope is still running. Do you want to close the form?", "Close Scope Application",
                    MessageBoxButtons.YesNo) == DialogResult.No)
                 {
                     // Cancel the Closing event from closing the form.
@@ -64,35 +65,42 @@ namespace Logic_Analyzer_App
                 case 5: byteme[0] += 5; break;
                 case 6: byteme[0] += 6; break;
                 case 7: byteme[0] += 7; break;
+                default: MessageBox.Show("Please Select a Time Duration.", "Error: No Time Duration Selected.", MessageBoxButtons.OK); return;  break;
             }
             switch (RFChoice.SelectedIndex)
             {
                 case 0: byteme[0] += 16; break;
-                case 1: byteme[0] += 0;  break; 
+                case 1: byteme[0] += 0;  break;
+                default: MessageBox.Show("Please Select a Trigger.", "Error: No Trigger Selected.", MessageBoxButtons.OK); return;  break;
             }
             Port.Write(byteme, 0, 1); //Writing PWM selection to MBED
             byteme[0] = 0;
             IwasRunnin = true;
+            StopThePresses = false;
         }
         public void SerialtoTextMethod(int TheValue)
         {
-            TheValue -= 40; 
-          /*  if (TheValue > 1)
-            {
-                MessageBox.Show("Invalid Number Received. Please make sure only using PWMs that range from 0 to 1.\nIf you are super sure you are, please file a bug report", "Error: Invalid Number!", MessageBoxButtons.OK);
-                IwasRunnin = false;
-                byteme[0] = 0;
-                Port.Write(byteme, 0, 1); 
-                Port.Close();
-                MessageBox.Show("Please restart the PWM window.", "PWM Restart", MessageBoxButtons.OK);
-            }*/
+            TheValue/=254; 
             dygraph.Add(TheValue);
             PWMDisplay.Series["PWMShow"].Points.DataBindY(dygraph);
         }
         private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+            if (StopThePresses)
+            {
+                Port.ReadChar(); //Dumping the data; the user doesn't care
+                return;
+            }
+            IwasRunnin = false;
             Invoke(mbedBAD, Port.ReadChar());
         }
 
+        private void PWMStop_Click(object sender, EventArgs e)
+        {
+            StopThePresses = true;
+            MessageBox.Show("You have stopped the gathering and showing of data; please hold for the MBED to reset.", "Information: Stop", MessageBoxButtons.OK);
+            byteme[0] = 0;
+            Port.Write(byteme, 0, 1);
+        }
     }
 }
