@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -35,6 +36,7 @@
             this.I2CStart = new System.Windows.Forms.Button();
             this.I2CStop = new System.Windows.Forms.Button();
             this.I2CPinInfo = new System.Windows.Forms.Label();
+            this.Port = new System.IO.Ports.SerialPort(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.I2CChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +83,6 @@
             this.I2CStart.TabIndex = 1;
             this.I2CStart.Text = "Start";
             this.I2CStart.UseVisualStyleBackColor = true;
-            this.I2CStart.Click += new System.EventHandler(this.button1_Click);
             // 
             // I2CStop
             // 
@@ -124,5 +125,6 @@
         private System.Windows.Forms.Button I2CStart;
         private System.Windows.Forms.Button I2CStop;
         private System.Windows.Forms.Label I2CPinInfo;
+        private System.IO.Ports.SerialPort Port;
     }
 }

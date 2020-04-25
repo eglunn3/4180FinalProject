@@ -44,8 +44,15 @@ namespace Logic_Analyzer_App
             }
             else
             {
-                numberCOM = comboBox1.SelectedIndex;
-                theCOM = portnames[numberCOM];
+                try
+                {
+                    numberCOM = comboBox1.SelectedIndex;
+                    theCOM = portnames[numberCOM];
+                } 
+                catch
+                {
+                    MessageBox.Show("Please restart the program. You have inserted a serial device while the program is running, which causes problems.\nPlease remember to always insert whatever device you want to use before the program starts.", "Error: Invalid Serial Operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 
 
             }
@@ -53,45 +60,105 @@ namespace Logic_Analyzer_App
 
         private void DigitalRead_Click(object sender, EventArgs e)
         {
-
-            DigOpen = this.IsMdiContainer;
-            if (!DigOpen & !string.IsNullOrEmpty(theCOM))
+            try
             {
-                Digital dig = new Digital(theCOM, DigOpen);
-                dig.StartPosition = FormStartPosition.CenterScreen;
-                dig.Show();
-                dig.DigOpen = true;
-                DigOpen = dig.DigOpen;
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    Digital dig = new Digital(theCOM, DigOpen);
+                    dig.StartPosition = FormStartPosition.CenterScreen;
+                    dig.Show();
 
-            }
-            else
-            {
-                if (PortOpen)
-                { 
-                    MessageBox.Show("Serial port connection already established.", "Serial Port Error"); 
-                }
-                else if (DigOpen)
-                {
-                    MessageBox.Show("Try exiting Digital Program", "Program already open");
-                }
-                else if (string.IsNullOrEmpty(theCOM))
-                {
-                    MessageBox.Show("Bad connection to serial port.", "Serial Port Error");
                 }
                 else
                 {
-                    //MessageBox.Show("Undescribed Behavior", "Undescribed Behavior");
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
                 }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
         private void I2CSelect_Click(object sender, EventArgs e)
         {
-            I2COpen = this.IsMdiContainer;
-            I2C i2c = new I2C();
-            i2c.Show();
+            try
+            {
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    I2C I2CWindow = new I2C(theCOM);
+                    I2CWindow.StartPosition = FormStartPosition.CenterScreen;
+                    I2CWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
+        }
+
+        private void AnalogSelect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    Analog AnnaBanana = new Analog(theCOM);
+                    AnnaBanana.StartPosition = FormStartPosition.CenterScreen;
+                    AnnaBanana.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PWMButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(theCOM))
+                {
+                    Scope ScopeWindow = new Scope(theCOM);
+                    ScopeWindow.StartPosition = FormStartPosition.CenterScreen;
+                    ScopeWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No serial port selected. Please select an unused serial port.", "Serial Port Error");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("This port is already in use. To use this port, close the current window. Otherwise, select a different port.", "Serial Port Error");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error! If you see this message, a serious unknown problem has occured.\n Please report what happened and what lead up to this error. ",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
     }
 }
