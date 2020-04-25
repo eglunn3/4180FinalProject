@@ -19,7 +19,7 @@ namespace Logic_Analyzer_App
         List<double> dygraph = new List<double>();
         List<double> time = new List<double>(); 
         bool StopThePresses = false;
-        double timespace = 0.0;
+        double timespace = 50E-6;
         bool FirstCereal = true;
         public Scope(string ComPort)
         {
@@ -32,8 +32,15 @@ namespace Logic_Analyzer_App
         }
         private void PWM_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show(Port.BytesToRead.ToString());
-            if (Port.BytesToRead < 1)
+            if (!Port.IsOpen)
+            {
+                IwasRunnin = false;
+            }
+            else if (Port.BytesToRead > 0)
+            {
+                IwasRunnin = true;
+            } 
+            else
             {
                 IwasRunnin = false;
             }
@@ -68,6 +75,10 @@ namespace Logic_Analyzer_App
         {
             byteme[0] = 0;
             dygraph.Clear();
+            time.Clear();
+            dygraph.TrimExcess();
+            time.TrimExcess();
+            Port.DiscardInBuffer();
             try
             {
                 Port.Write(byteme, 0, 1);
@@ -81,14 +92,14 @@ namespace Logic_Analyzer_App
             
             switch (ScopeTimeSelect.SelectedIndex)
             {
-                case 0: byteme[0] += 0; timespace = 0.001;  break;
-                case 1: byteme[0] += 1; timespace = 0.005;  break;
-                case 2: byteme[0] += 2; timespace = 0.01;   break;
-                case 3: byteme[0] += 3; timespace = 0.05;   break;
-                case 4: byteme[0] += 4; timespace = 0.1;    break;
-                case 5: byteme[0] += 5; timespace = 0.25;   break;
-                case 6: byteme[0] += 6; timespace = 0.5;    break;
-                case 7: byteme[0] += 7; timespace = 1.0;    break;
+                case 0: byteme[0] += 0;  break;
+                case 1: byteme[0] += 1;  break;
+                case 2: byteme[0] += 2;  break;
+                case 3: byteme[0] += 3;  break;
+                case 4: byteme[0] += 4;  break;
+                case 5: byteme[0] += 5;  break;
+                case 6: byteme[0] += 6;  break;
+                case 7: byteme[0] += 7;  break;
                 default: MessageBox.Show("Please Select a Time Duration.", "Error: No Time Duration Selected.", MessageBoxButtons.OK, MessageBoxIcon.Error); return;  break;
             }
             switch (RFChoice.SelectedIndex)
@@ -112,36 +123,40 @@ namespace Logic_Analyzer_App
         }
         public void SerialtoTextMethod(int TheValue)
         {
-            double temp = 0;
-            temp=((double)TheValue/254.0)*3.3;
-            if (temp > 3.3)
-            {
-                try
-                {
-                    dygraph.Add(dygraph[dygraph.Count - 1]);
-                } 
-                catch
-                {
-                    dygraph.Add(0);
-                }
-            }
-            else
-            {
-                dygraph.Add(temp);
-            }
-            if (FirstCereal)
-            {
+          double temp = 0;
+          temp = ((double)TheValue / 254.0) * 3.3;
+          if (temp > 3.3)
+           {
+             try
+             {
+              dygraph.Add(dygraph[dygraph.Count - 1]);
+              }
+             catch
+             {
+             dygraph.Add(0);
+             }
+           }
+           else
+           {
+            dygraph.Add(temp);
+           }
+           if (FirstCereal)
+           {
                 time.Add(0);
                 FirstCereal = false;
-            } else
-            {
+           }
+           else
+           {
                 time.Add(time[time.Count - 1] + timespace);
-            } 
-            if (time.Count != dygraph.Count)
+           }
+           try
             {
-                MessageBox.Show("Critical error: Mismatch of time/dygraph");
+                ScopeDisplay.Series["ScopeShow"].Points.DataBindXY(time, dygraph);
             }
-            ScopeDisplay.Series["ScopeShow"].Points.DataBindXY(time,dygraph);
+            catch
+            {
+                MessageBox.Show("Critical error: Mismatch of time/dygraph. Please restart the program and try again.","Error: Invalid lengths of list objects.",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
         private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
@@ -149,7 +164,7 @@ namespace Logic_Analyzer_App
             {
                 try
                 {
-                    Port.ReadChar(); //Dumping the data; the user doesn't care
+                    Port.DiscardInBuffer(); //Dumping the data; the user doesn't care
                 }
                 catch
                 {
@@ -157,9 +172,10 @@ namespace Logic_Analyzer_App
                 }
                 return;
             }
-            
-            Invoke(mbedBAD, Port.ReadChar());
-           
+            while (Port.BytesToRead > 0)
+            {
+                Invoke(mbedBAD, Port.ReadChar());
+            }
         }
 
         private void PWMStop_Click(object sender, EventArgs e)
@@ -169,7 +185,9 @@ namespace Logic_Analyzer_App
             byteme[0] = 0;
             IwasRunnin = false;
             dygraph.Clear();
+            time.Clear();
             dygraph.TrimExcess();
+            time.TrimExcess();
             try
             {
                 Port.Write(byteme, 0, 1);
