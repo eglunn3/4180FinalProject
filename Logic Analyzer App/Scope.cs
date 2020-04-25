@@ -29,7 +29,7 @@ namespace Logic_Analyzer_App
             Port.Encoding = Encoding.GetEncoding(1252);
             Port.ReceivedBytesThreshold = 1; 
         }
-        private void PWM_FormClosing(object sender, FormClosingEventArgs e)
+        private void Scope_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!Port.IsOpen)
             {
@@ -70,7 +70,7 @@ namespace Logic_Analyzer_App
             }
         }
 
-        private void PWMStart_Click(object sender, EventArgs e)
+        private void ScopeStart_Click(object sender, EventArgs e)
         {
             byteme[0] = 0;
             dygraph.Clear();
@@ -109,7 +109,7 @@ namespace Logic_Analyzer_App
             }
             try
             {
-                Port.Write(byteme, 0, 1); //Writing PWM selection to MBED
+                Port.Write(byteme, 0, 1); //Writing Scope selection to MBED
             }
             catch
             {
@@ -177,7 +177,7 @@ namespace Logic_Analyzer_App
             }
         }
 
-        private void PWMStop_Click(object sender, EventArgs e)
+        private void ScopeStop_Click(object sender, EventArgs e)
         {
             StopThePresses = true;
             MessageBox.Show("You have stopped the gathering and showing of data; please hold for the MBED to reset.", "Information: Stop", MessageBoxButtons.OK, MessageBoxIcon.Information);

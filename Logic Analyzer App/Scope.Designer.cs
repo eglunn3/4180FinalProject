@@ -34,8 +34,8 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ScopeDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Port = new System.IO.Ports.SerialPort(this.components);
-            this.PWMStart = new System.Windows.Forms.Button();
-            this.PWMStop = new System.Windows.Forms.Button();
+            this.ScopeStart = new System.Windows.Forms.Button();
+            this.ScopeStop = new System.Windows.Forms.Button();
             this.ScopeTimeSelect = new System.Windows.Forms.ComboBox();
             this.RFChoice = new System.Windows.Forms.ComboBox();
             this.ScopePinInfo = new System.Windows.Forms.Label();
@@ -66,25 +66,25 @@
             // 
             this.Port.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.CerealKiller);
             // 
-            // PWMStart
+            // ScopeStart
             // 
-            this.PWMStart.Location = new System.Drawing.Point(162, 634);
-            this.PWMStart.Name = "PWMStart";
-            this.PWMStart.Size = new System.Drawing.Size(110, 44);
-            this.PWMStart.TabIndex = 1;
-            this.PWMStart.Text = "Start";
-            this.PWMStart.UseVisualStyleBackColor = true;
-            this.PWMStart.Click += new System.EventHandler(this.PWMStart_Click);
+            this.ScopeStart.Location = new System.Drawing.Point(162, 634);
+            this.ScopeStart.Name = "ScopeStart";
+            this.ScopeStart.Size = new System.Drawing.Size(110, 44);
+            this.ScopeStart.TabIndex = 1;
+            this.ScopeStart.Text = "Start";
+            this.ScopeStart.UseVisualStyleBackColor = true;
+            this.ScopeStart.Click += new System.EventHandler(this.ScopeStart_Click);
             // 
-            // PWMStop
+            // ScopeStop
             // 
-            this.PWMStop.Location = new System.Drawing.Point(343, 634);
-            this.PWMStop.Name = "PWMStop";
-            this.PWMStop.Size = new System.Drawing.Size(110, 44);
-            this.PWMStop.TabIndex = 2;
-            this.PWMStop.Text = "Stop";
-            this.PWMStop.UseVisualStyleBackColor = true;
-            this.PWMStop.Click += new System.EventHandler(this.PWMStop_Click);
+            this.ScopeStop.Location = new System.Drawing.Point(343, 634);
+            this.ScopeStop.Name = "ScopeStop";
+            this.ScopeStop.Size = new System.Drawing.Size(110, 44);
+            this.ScopeStop.TabIndex = 2;
+            this.ScopeStop.Text = "Stop";
+            this.ScopeStop.UseVisualStyleBackColor = true;
+            this.ScopeStop.Click += new System.EventHandler(this.ScopeStop_Click);
             // 
             // ScopeTimeSelect
             // 
@@ -133,12 +133,12 @@
             this.Controls.Add(this.ScopePinInfo);
             this.Controls.Add(this.RFChoice);
             this.Controls.Add(this.ScopeTimeSelect);
-            this.Controls.Add(this.PWMStop);
-            this.Controls.Add(this.PWMStart);
+            this.Controls.Add(this.ScopeStop);
+            this.Controls.Add(this.ScopeStart);
             this.Controls.Add(this.ScopeDisplay);
             this.Name = "Scope";
             this.Text = "Scope";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PWM_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Scope_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ScopeDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -148,8 +148,8 @@
         #endregion
         private System.Windows.Forms.DataVisualization.Charting.Chart ScopeDisplay;
         private System.IO.Ports.SerialPort Port;
-        private System.Windows.Forms.Button PWMStart;
-        private System.Windows.Forms.Button PWMStop;
+        private System.Windows.Forms.Button ScopeStart;
+        private System.Windows.Forms.Button ScopeStop;
         private System.Windows.Forms.ComboBox ScopeTimeSelect;
         private System.Windows.Forms.ComboBox RFChoice;
         private System.Windows.Forms.Label ScopePinInfo;
