@@ -50,7 +50,7 @@
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.ScopeDisplay.Legends.Add(legend1);
-            this.ScopeDisplay.Location = new System.Drawing.Point(101, 29);
+            this.ScopeDisplay.Location = new System.Drawing.Point(5, 29);
             this.ScopeDisplay.Name = "ScopeDisplay";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -58,7 +58,7 @@
             series1.Legend = "Legend1";
             series1.Name = "ScopeShow";
             this.ScopeDisplay.Series.Add(series1);
-            this.ScopeDisplay.Size = new System.Drawing.Size(746, 577);
+            this.ScopeDisplay.Size = new System.Drawing.Size(1535, 577);
             this.ScopeDisplay.TabIndex = 0;
             this.ScopeDisplay.Text = "Scope Display";
             // 
@@ -129,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 727);
+            this.ClientSize = new System.Drawing.Size(1546, 738);
             this.Controls.Add(this.ScopePinInfo);
             this.Controls.Add(this.RFChoice);
             this.Controls.Add(this.ScopeTimeSelect);

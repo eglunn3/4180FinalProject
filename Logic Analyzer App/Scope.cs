@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//TODO: Double check IwasRunning turn off
 namespace Logic_Analyzer_App
 {
     public partial class Scope : Form
