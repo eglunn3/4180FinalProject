@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(I2C));
             this.ScopePinInfo = new System.Windows.Forms.Label();
             this.I2CStop = new System.Windows.Forms.Button();
             this.I2CStart = new System.Windows.Forms.Button();
@@ -46,26 +47,29 @@
             // ScopePinInfo
             // 
             this.ScopePinInfo.AutoSize = true;
-            this.ScopePinInfo.Location = new System.Drawing.Point(119, 826);
+            this.ScopePinInfo.Location = new System.Drawing.Point(238, 1600);
+            this.ScopePinInfo.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.ScopePinInfo.Name = "ScopePinInfo";
-            this.ScopePinInfo.Size = new System.Drawing.Size(131, 17);
+            this.ScopePinInfo.Size = new System.Drawing.Size(259, 32);
             this.ScopePinInfo.TabIndex = 12;
             this.ScopePinInfo.Text = "Use P16 for Scope.";
             // 
             // I2CStop
             // 
-            this.I2CStop.Location = new System.Drawing.Point(221, 759);
+            this.I2CStop.Location = new System.Drawing.Point(442, 1471);
+            this.I2CStop.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.I2CStop.Name = "I2CStop";
-            this.I2CStop.Size = new System.Drawing.Size(110, 44);
+            this.I2CStop.Size = new System.Drawing.Size(220, 85);
             this.I2CStop.TabIndex = 11;
             this.I2CStop.Text = "Stop";
             this.I2CStop.UseVisualStyleBackColor = true;
             // 
             // I2CStart
             // 
-            this.I2CStart.Location = new System.Drawing.Point(40, 759);
+            this.I2CStart.Location = new System.Drawing.Point(80, 1471);
+            this.I2CStart.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.I2CStart.Name = "I2CStart";
-            this.I2CStart.Size = new System.Drawing.Size(110, 44);
+            this.I2CStart.Size = new System.Drawing.Size(220, 85);
             this.I2CStart.TabIndex = 10;
             this.I2CStart.Text = "Start";
             this.I2CStart.UseVisualStyleBackColor = true;
@@ -82,52 +86,56 @@
             "250ms",
             "500ms",
             "1s"});
-            this.I2CTimeSelect.Location = new System.Drawing.Point(390, 770);
+            this.I2CTimeSelect.Location = new System.Drawing.Point(780, 1492);
+            this.I2CTimeSelect.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.I2CTimeSelect.Name = "I2CTimeSelect";
-            this.I2CTimeSelect.Size = new System.Drawing.Size(163, 24);
+            this.I2CTimeSelect.Size = new System.Drawing.Size(322, 39);
             this.I2CTimeSelect.TabIndex = 13;
             this.I2CTimeSelect.Text = "Select Length of Run";
             // 
             // I2CDisplay
             // 
-            chartArea3.BackColor = System.Drawing.Color.Black;
-            chartArea3.BackSecondaryColor = System.Drawing.Color.Black;
-            chartArea3.Name = "SDAChart";
-            chartArea4.BackColor = System.Drawing.Color.Black;
-            chartArea4.Name = "SCLChart";
-            this.I2CDisplay.ChartAreas.Add(chartArea3);
-            this.I2CDisplay.ChartAreas.Add(chartArea4);
-            legend2.Name = "Legend1";
-            legend2.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Tall;
-            this.I2CDisplay.Legends.Add(legend2);
-            this.I2CDisplay.Location = new System.Drawing.Point(12, 12);
+            chartArea1.BackColor = System.Drawing.Color.Black;
+            chartArea1.BackSecondaryColor = System.Drawing.Color.Black;
+            chartArea1.Name = "SDAChart";
+            chartArea2.BackColor = System.Drawing.Color.Black;
+            chartArea2.Name = "SCLChart";
+            this.I2CDisplay.ChartAreas.Add(chartArea1);
+            this.I2CDisplay.ChartAreas.Add(chartArea2);
+            legend1.Name = "Legend1";
+            legend1.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Tall;
+            this.I2CDisplay.Legends.Add(legend1);
+            this.I2CDisplay.Location = new System.Drawing.Point(24, 23);
+            this.I2CDisplay.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.I2CDisplay.Name = "I2CDisplay";
-            series3.ChartArea = "SDAChart";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.Color = System.Drawing.Color.Red;
-            series3.Legend = "Legend1";
-            series3.Name = "SDA";
-            series4.ChartArea = "SCLChart";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            series4.Legend = "Legend1";
-            series4.Name = "SCL";
-            this.I2CDisplay.Series.Add(series3);
-            this.I2CDisplay.Series.Add(series4);
-            this.I2CDisplay.Size = new System.Drawing.Size(1774, 717);
+            series1.ChartArea = "SDAChart";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.Red;
+            series1.Legend = "Legend1";
+            series1.Name = "SDA";
+            series2.ChartArea = "SCLChart";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            series2.Legend = "Legend1";
+            series2.Name = "SCL";
+            this.I2CDisplay.Series.Add(series1);
+            this.I2CDisplay.Series.Add(series2);
+            this.I2CDisplay.Size = new System.Drawing.Size(3548, 1389);
             this.I2CDisplay.TabIndex = 14;
             this.I2CDisplay.Text = "I2C Display";
             // 
             // I2C
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1812, 841);
+            this.ClientSize = new System.Drawing.Size(3624, 1629);
             this.Controls.Add(this.I2CDisplay);
             this.Controls.Add(this.I2CTimeSelect);
             this.Controls.Add(this.ScopePinInfo);
             this.Controls.Add(this.I2CStop);
             this.Controls.Add(this.I2CStart);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "I2C";
             this.Text = "I2C";
             ((System.ComponentModel.ISupportInitialize)(this.I2CDisplay)).EndInit();
