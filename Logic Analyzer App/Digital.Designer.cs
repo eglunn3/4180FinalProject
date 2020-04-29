@@ -191,7 +191,6 @@
             this.Pin23_Select.Size = new System.Drawing.Size(34, 33);
             this.Pin23_Select.TabIndex = 16;
             this.Pin23_Select.UseVisualStyleBackColor = true;
-
             // 
             // Pin22_Select
             // 
@@ -201,7 +200,6 @@
             this.Pin22_Select.Size = new System.Drawing.Size(34, 33);
             this.Pin22_Select.TabIndex = 17;
             this.Pin22_Select.UseVisualStyleBackColor = true;
-
             // 
             // Pin25_Select
             // 
@@ -211,7 +209,6 @@
             this.Pin25_Select.Size = new System.Drawing.Size(34, 33);
             this.Pin25_Select.TabIndex = 18;
             this.Pin25_Select.UseVisualStyleBackColor = true;
-
             // 
             // PinName1
             // 
@@ -288,6 +285,7 @@
             this.Controls.Add(this.Pin1Out);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.PinInfo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Digital";
             this.Text = "Digital";

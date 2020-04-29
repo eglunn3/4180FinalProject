@@ -861,6 +861,7 @@
             this.Controls.Add(this.Pin16_Select);
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.StartButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Analog";
             this.Text = "Analog";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Analog_FormClosing);
