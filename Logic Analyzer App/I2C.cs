@@ -21,6 +21,8 @@ namespace Logic_Analyzer_App
         bool StopThePresses = false;
         double timespace = 50E-6;
         bool FirstCereal = true;
+        bool HaveViewTip = false;
+        bool ErrorHasHappened = false;
         List<ToolTipInfo> HexStor = new List<ToolTipInfo>();
         public I2C(string ComPort)
         {
@@ -80,6 +82,8 @@ namespace Logic_Analyzer_App
             dygraph.TrimExcess();
             time.TrimExcess();
             Port.DiscardInBuffer();
+            ErrorHasHappened = false;
+            HaveViewTip = false;
             try
             {
                 Port.Write(byteme, 0, 1);
@@ -120,27 +124,48 @@ namespace Logic_Analyzer_App
         }
         public void SerialtoTextMethod(int TheValue)
         {
-            double temp = 0;
-            temp = (double)TheValue / 254.0;
-            if (temp > 1.1)
+            float temp = 0;
+            int prep = 0;
+            temp = (float)TheValue / (float)254.0;
+           
+            
+            if (temp > 1.05)
             {
-                try
-                {
-                    dygraph.Add(dygraph[dygraph.Count - 1]);
-                }
-                catch
-                {
-                    dygraph.Add(0);
-                }
+                return;
             }
-            else if (temp > 0.5 && temp < 1.1)
+            else if (temp > 0.5 && temp < 1.05)
             {
-                dygraph.Add(1);
+                prep = 1;
+                
             }
             else if (temp < 0.5)
             {
-                dygraph.Add(0);
+                prep = 0;
             }
+            try
+            {
+                if (dygraph[dygraph.Count - 1] == prep)
+                {
+                    return;
+                }
+                else
+                {
+                    dygraph.Add(prep);
+                }
+            }
+            catch
+            {
+                dygraph.Add(prep);
+                if (ErrorHasHappened)
+                {
+                    MessageBox.Show("Warning: Data May be Tainted!", "Warning: Data Issue", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    ErrorHasHappened = true;
+                }
+            }
+            
             if (FirstCereal)
             {
                 time.Add(0);
@@ -150,9 +175,17 @@ namespace Logic_Analyzer_App
             {
                 time.Add(time[time.Count - 1] + timespace);
             }
+            
             try
             {
-                I2CDisplay.Series["SDA"].Points.DataBindXY(time, dygraph);
+                if (dygraph.Count != 0 || time.Count != 0)
+                {
+                    I2CDisplay.Series["SDA"].Points.DataBindXY(time, dygraph);
+                }
+                else
+                {
+                    return;
+                }
             }
             catch
             {
@@ -160,9 +193,13 @@ namespace Logic_Analyzer_App
             }
             if ((dygraph.Count - 1) % 9 == 0 && dygraph.Count -1 !=0)
             {
-                HexStor.Add(new ToolTipInfo { TimeLoc = time[dygraph.Count - 1 - 5], HexInfo = "20", ArrayTrack = dygraph.Count - 1 - 5 }); 
-                HexStor.Add(new ToolTipInfo { TimeLoc = time[dygraph.Count - 1 - 1], HexInfo = "20", ArrayTrack = dygraph.Count - 1 - 1 });
+                HexStor.Add(new ToolTipInfo { ArrayTrack = dygraph.Count - 1 - 5, HexInfo = HexDetect(dygraph.Count - 1 - 5),TimeLoc= time[time.Count - 1 - 5] });
+                HexStor.Add(new ToolTipInfo { ArrayTrack = dygraph.Count - 1 - 1, HexInfo = HexDetect(dygraph.Count - 1 - 1), TimeLoc= time[time.Count - 1 - 1] });
             }
+            /*else
+            {
+                I2CDisplay.Series["SDA"].Points[dygraph.Count - 1].ToolTip = "No ToolTip Found";
+            }*/
         }
         private void CerealKiller(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
@@ -203,45 +240,45 @@ namespace Logic_Analyzer_App
                 MessageBox.Show("Error: MBED could not be reset.", "Error: Failed Reset", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             FirstCereal = false;
+            ErrorHasHappened = false;
+            HaveViewTip = false;
         }
-
-        private void I2CDisplay_GetToolTipText(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
+        private string HexDetect(int start)
         {
-            var working = new ToolTipInfo();
-            working=HexStor.Find(f=> e.X==f.TimeLoc);
-            if (working == null) return; 
-            if (working.HexInfo != "20")
-            {
-                e.Text = working.HexInfo;
-                return;
-            }
-            string find = dygraph[working.ArrayTrack-3].ToString()+ dygraph[working.ArrayTrack - 2].ToString()+dygraph[working.ArrayTrack - 1].ToString() + dygraph[working.ArrayTrack].ToString();
-            HexDetect(find,working);
-            e.Text = working.HexInfo;
-        }
-        private void HexDetect(String find, ToolTipInfo stor)
-        {
+            string find = dygraph[start - 3].ToString() + dygraph[start - 2].ToString() + dygraph[start - 1].ToString() + dygraph[start].ToString();
             switch (find)
             {
-                case "0000": stor.HexInfo = "0x0"; break;
-                case "0001": stor.HexInfo = "0x1"; break;
-                case "0010": stor.HexInfo = "0x2"; break;
-                case "0011": stor.HexInfo = "0x3"; break;
-                case "0100": stor.HexInfo = "0x4"; break;
-                case "0101": stor.HexInfo = "0x5"; break;
-                case "0110": stor.HexInfo = "0x6"; break;
-                case "0111": stor.HexInfo = "0x7"; break;
-                case "1000": stor.HexInfo = "0x8"; break;
-                case "1001": stor.HexInfo = "0x9"; break;
-                case "1010": stor.HexInfo = "0xA"; break;
-                case "1011": stor.HexInfo = "0xB"; break;
-                case "1100": stor.HexInfo = "0xC"; break;
-                case "1101": stor.HexInfo = "0xD"; break;
-                case "1110": stor.HexInfo = "0xE"; break;
-                case "1111": stor.HexInfo = "0xF"; break;
+                case "0000": return "0x0"; break;
+                case "0001": return "0x1"; break;
+                case "0010": return "0x2"; break;
+                case "0011": return "0x3"; break;
+                case "0100": return "0x4"; break;
+                case "0101": return "0x5"; break;
+                case "0110": return "0x6"; break;
+                case "0111": return "0x7"; break;
+                case "1000": return "0x8"; break;
+                case "1001": return "0x9"; break;
+                case "1010": return "0xA"; break;
+                case "1011": return "0xB"; break;
+                case "1100": return "0xC"; break;
+                case "1101": return "0xD"; break;
+                case "1110": return "0xE"; break;
+                case "1111": return "0xF"; break;
+            }
+            return "No ToolTip Found";
+        }
+
+        private void I2CDisplay_DoubleClick(object sender, EventArgs e)
+        {
+            //MessageBox.Show("You have started ToolTipInfo");
+            if (!HaveViewTip)
+            {
+                foreach (ToolTipInfo tipInfo in HexStor)
+                {
+                    I2CDisplay.Series["SDA"].Points[tipInfo.ArrayTrack].ToolTip = tipInfo.HexInfo;
+                }
+                HaveViewTip = true;
             }
         }
-     
-    
     }
 }
