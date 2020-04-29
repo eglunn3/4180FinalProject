@@ -120,7 +120,6 @@ namespace Logic_Analyzer_App
         }
         public void SerialtoTextMethod(int TheValue)
         {
-            MessageBox.Show("We got stuff!");
             double temp = 0;
             temp = (double)TheValue / 254.0;
             if (temp > 1.1)
