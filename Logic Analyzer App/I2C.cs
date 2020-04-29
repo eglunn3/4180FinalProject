@@ -79,8 +79,10 @@ namespace Logic_Analyzer_App
             byteme[0] = 0;
             dygraph.Clear();
             time.Clear();
+            HexStor.Clear();
             dygraph.TrimExcess();
             time.TrimExcess();
+            HexStor.TrimExcess();
             Port.DiscardInBuffer();
             ErrorHasHappened = false;
             HaveViewTip = false;
@@ -206,7 +208,9 @@ namespace Logic_Analyzer_App
             byteme[0] = 0;
             IwasRunnin = false;
             dygraph.Clear();
+            HexStor.Clear();
             time.Clear();
+            HexStor.TrimExcess();
             dygraph.TrimExcess();
             time.TrimExcess();
             try
@@ -253,7 +257,7 @@ namespace Logic_Analyzer_App
             {
                 foreach (ToolTipInfo tipInfo in HexStor)
                 {
-                    I2CDisplay.Series["SDA"].Points[tipInfo.ArrayTrack].ToolTip = tipInfo.HexInfo;
+                        I2CDisplay.Series["SDA"].Points[tipInfo.ArrayTrack].ToolTip = tipInfo.HexInfo;
                 }
                 HaveViewTip = true;
             }
