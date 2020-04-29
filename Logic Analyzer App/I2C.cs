@@ -22,8 +22,6 @@ namespace Logic_Analyzer_App
         double timespace = 50E-6;
         bool FirstCereal = true;
         List<ToolTipInfo> HexStor = new List<ToolTipInfo>();
-        uint Total4s = 0;
-        uint ScanTrack = 0;
         public I2C(string ComPort)
         {
             InitializeComponent();
@@ -122,9 +120,10 @@ namespace Logic_Analyzer_App
         }
         public void SerialtoTextMethod(int TheValue)
         {
+            MessageBox.Show("We got stuff!");
             double temp = 0;
-            temp = ((double)TheValue / 254.0);
-            if (temp > 1)
+            temp = (double)TheValue / 254.0;
+            if (temp > 1.1)
             {
                 try
                 {
@@ -135,7 +134,7 @@ namespace Logic_Analyzer_App
                     dygraph.Add(0);
                 }
             }
-            else if (temp > 0.5 && temp < 1)
+            else if (temp > 0.5 && temp < 1.1)
             {
                 dygraph.Add(1);
             }
@@ -160,7 +159,7 @@ namespace Logic_Analyzer_App
             {
                 MessageBox.Show("Critical error: Mismatch of time/dygraph. Please restart the program and try again.", "Error: Invalid lengths of list objects.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if ((dygraph.Count - 1) % 9 == 0)
+            if ((dygraph.Count - 1) % 9 == 0 && dygraph.Count -1 !=0)
             {
                 HexStor.Add(new ToolTipInfo { TimeLoc = time[dygraph.Count - 1 - 5], HexInfo = "20", ArrayTrack = dygraph.Count - 1 - 5 }); 
                 HexStor.Add(new ToolTipInfo { TimeLoc = time[dygraph.Count - 1 - 1], HexInfo = "20", ArrayTrack = dygraph.Count - 1 - 1 });
@@ -211,6 +210,7 @@ namespace Logic_Analyzer_App
         {
             var working = new ToolTipInfo();
             working=HexStor.Find(f=> e.X==f.TimeLoc);
+            if (working == null) return; 
             if (working.HexInfo != "20")
             {
                 e.Text = working.HexInfo;

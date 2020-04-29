@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(I2C));
             this.ScopePinInfo = new System.Windows.Forms.Label();
             this.I2CStop = new System.Windows.Forms.Button();
@@ -59,6 +59,7 @@
             this.I2CStop.TabIndex = 11;
             this.I2CStop.Text = "Stop";
             this.I2CStop.UseVisualStyleBackColor = true;
+            this.I2CStop.Click += new System.EventHandler(this.I2CStop_Click);
             // 
             // I2CStart
             // 
@@ -68,6 +69,7 @@
             this.I2CStart.TabIndex = 10;
             this.I2CStart.Text = "Start";
             this.I2CStart.UseVisualStyleBackColor = true;
+            this.I2CStart.Click += new System.EventHandler(this.I2CStart_Click);
             // 
             // I2CTimeSelect
             // 
@@ -89,26 +91,30 @@
             // 
             // I2CDisplay
             // 
-            chartArea1.BackColor = System.Drawing.Color.Black;
-            chartArea1.BackSecondaryColor = System.Drawing.Color.Black;
-            chartArea1.Name = "SDAChart";
-            this.I2CDisplay.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            legend1.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Tall;
-            this.I2CDisplay.Legends.Add(legend1);
+            chartArea2.BackColor = System.Drawing.Color.Black;
+            chartArea2.BackSecondaryColor = System.Drawing.Color.Black;
+            chartArea2.Name = "SDAChart";
+            this.I2CDisplay.ChartAreas.Add(chartArea2);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            legend2.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Tall;
+            this.I2CDisplay.Legends.Add(legend2);
             this.I2CDisplay.Location = new System.Drawing.Point(12, 12);
             this.I2CDisplay.Name = "I2CDisplay";
-            series1.ChartArea = "SDAChart";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Color = System.Drawing.Color.Red;
-            series1.Legend = "Legend1";
-            series1.Name = "SDA";
-            this.I2CDisplay.Series.Add(series1);
+            series2.ChartArea = "SDAChart";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.Name = "SDA";
+            this.I2CDisplay.Series.Add(series2);
             this.I2CDisplay.Size = new System.Drawing.Size(1830, 548);
             this.I2CDisplay.TabIndex = 14;
             this.I2CDisplay.Text = "I2C Display";
             this.I2CDisplay.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.I2CDisplay_GetToolTipText);
+            // 
+            // Port
+            // 
+            this.Port.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.CerealKiller);
             // 
             // I2C
             // 
@@ -123,6 +129,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "I2C";
             this.Text = "I2C";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.I2C_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.I2CDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
