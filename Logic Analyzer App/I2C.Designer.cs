@@ -47,9 +47,10 @@
             this.I2CPinInfo.AutoSize = true;
             this.I2CPinInfo.Location = new System.Drawing.Point(91, 676);
             this.I2CPinInfo.Name = "I2CPinInfo";
-            this.I2CPinInfo.Size = new System.Drawing.Size(111, 17);
+            this.I2CPinInfo.Size = new System.Drawing.Size(629, 21);
             this.I2CPinInfo.TabIndex = 12;
-            this.I2CPinInfo.Text = "Use P16 for I2C.";
+            this.I2CPinInfo.Text = "Use P16 for I2C. Double click on chart to get tooltip info of hexadecimal values." +
+    "";
             // 
             // I2CStop
             // 
@@ -91,6 +92,10 @@
             // 
             // I2CDisplay
             // 
+            chartArea1.AxisX.MinorGrid.Enabled = true;
+            chartArea1.AxisY.Crossing = -1.7976931348623157E+308D;
+            chartArea1.AxisY.Interval = 0.1D;
+            chartArea1.AxisY.Minimum = -0.1D;
             chartArea1.BackColor = System.Drawing.Color.Black;
             chartArea1.BackSecondaryColor = System.Drawing.Color.Black;
             chartArea1.Name = "SDAChart";
@@ -102,7 +107,7 @@
             this.I2CDisplay.Location = new System.Drawing.Point(12, 12);
             this.I2CDisplay.Name = "I2CDisplay";
             series1.ChartArea = "SDAChart";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series1.Color = System.Drawing.Color.Red;
             series1.Legend = "Legend1";
             series1.Name = "SDA";

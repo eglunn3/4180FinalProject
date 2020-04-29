@@ -142,29 +142,7 @@ namespace Logic_Analyzer_App
             {
                 prep = 0;
             }
-            try
-            {
-                if (dygraph[dygraph.Count - 1] == prep)
-                {
-                    return;
-                }
-                else
-                {
-                    dygraph.Add(prep);
-                }
-            }
-            catch
-            {
-                dygraph.Add(prep);
-                if (ErrorHasHappened)
-                {
-                    MessageBox.Show("Warning: Data May be Tainted!", "Warning: Data Issue", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    ErrorHasHappened = true;
-                }
-            }
+            dygraph.Add(prep);
             
             if (FirstCereal)
             {
