@@ -13,7 +13,7 @@
 The desktop app is written in C# with the MBED app written in C++. The repo is licensed under the MIT license, and contributions are welcomed and encouraged. Please either use a pull request or the issues tab as needed for features or bugs. 
 
 ## What the program does 
-
+A technical document describing program functionality and design is the Overleaf Software Explanation.pdf file on this repo.
 The program has four different options:
 
 ### Analog
