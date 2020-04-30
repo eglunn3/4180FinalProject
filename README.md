@@ -3,7 +3,7 @@
 ## Install
   Use an MBED toolchain to compile the MBED code for your board. Clone the repo and use Visual Studio 2019 with at least .NET Framework 4.7.2 to compile the desktop app. 
   If the MBED code does not compile, the code can be imported into the compiler from the following link
-  \url{https://github.com/eglunn3/MBED-Logic-Analyzer}
+  https://github.com/eglunn3/MBED-Logic-Analyzer
 ## Repo administration info  
 The desktop app is written in C# with the MBED app written in C++. The repo is licensed under the MIT license, and contributions are welcomed and encouraged. Please either use a pull request or the issues tab as needed for features or bugs. 
 
