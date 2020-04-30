@@ -17,7 +17,7 @@ A technical document describing program functionality and design is the Overleaf
 The program has four different options:
 
 ### Analog
-The analog screen allows the viewing of an analog value from 0-3.3 V in both test and bargraph form.
+The analog screen allows the viewing of an analog value from 0-3.3 V in both test and bar graph form.
 
 ### Digital
 The digital screen allows the viewing of digital status of circuits.
