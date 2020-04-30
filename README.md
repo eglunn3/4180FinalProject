@@ -7,7 +7,7 @@
 ## Demo and Presentation videos
   Demo: https://youtu.be/PdgsSM5gjTE 
   
-  Presentation: 
+  Presentation: https://drive.google.com/file/d/1VOqVpaF6fkzv6l-ZeEByFX3XtwPtffvK/view?usp=sharing
   
 ## Repo administration info  
 The desktop app is written in C# with the MBED app written in C++. The repo is licensed under the MIT license, and contributions are welcomed and encouraged. Please either use a pull request or the issues tab as needed for features or bugs. 
