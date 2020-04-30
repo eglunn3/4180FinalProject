@@ -21,5 +21,5 @@ The scope screen provides the interface to view an analog signal, from 0 to 3.3V
 ### I2C
 The I2C screen provides an interface to view an I2C SDA line. Tooltips are added to view hexadecimal information for the appropriate data chunks.
 
-## Compatiability 
-The program has been tested on Windows 10, .NET framework 4.7.2, with an MBED NXP LPC1768. However, other MBED platforms and other OSes that support .NET could work, but they have not been tested.
+## Compatibility
+The program has been tested on Windows 10, .NET framework 4.7.2, with a MBED NXP LPC1768. However, other MBED platforms and other OSes that support .NET could work, but they have not been tested.
